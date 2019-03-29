@@ -1,4 +1,4 @@
-defmodule Nadia.Poller do
+defmodule Nadia.Governor.Poller do
     @moduledoc """
       Creates a continuous poller for each BOT keeping the state intact.
       It's possible to run multiple bots, each in it's own state with it's own poller.
@@ -11,15 +11,18 @@ defmodule Nadia.Poller do
   #%{token: bot_token, config: config, offset: 0}
   def start_link(settings) do
     bot_name = Map.get(settings,:bot_name)
-    name =  {:via, Registry, {Registry.Bots, bot_name}}
+    name =  {:via, Registry, {Registry.BotPoller, bot_name}}
     settings = Map.merge(settings, %{name: name, offset: 0})
-    Logger.log :info, "Started poller for bot #{bot_name}  "
+    Logger.log :info, "Started poller for BOT: #{bot_name}  "
     GenServer.start_link __MODULE__, settings, name: name
   end
 
   def init(%{name: name} = settings) do
+    {:ok, matcher_pid} = Supervisor.start_child(Nadia.Supervisor.Matcher,
+      Supervisor.child_spec({Nadia.Governor.Matcher, settings}, id: settings.bot_name ))
+    Logger.log :info, "Matcher should have been started? #{inspect matcher_pid}"
     update(name)
-    {:ok, settings}
+    {:ok, Map.put(settings,:matcher, matcher_pid)}
   end
 
   def handle_cast(:update, %{offset: offset, token: token} = state) do
@@ -85,34 +88,15 @@ defmodule Nadia.Poller do
   defp process_message(nil,_state), do: IO.puts "nil"
   defp process_message(message,bot_settings) do
     try do
-    #  MafiaBot.Matcher.match message
-      match(message,bot_settings)
+      IO.puts "#{inspect bot_settings.matcher}, #{inspect message},#{bot_settings.token}"
+      Nadia.Governor.Matcher.match bot_settings.matcher, message,bot_settings.token
+    #  match(message,bot_settings)
     rescue
       err in MatchError ->
         Logger.log :warn, "Errored with #{err} at #{Poison.encode! message}"
     end
   end
 
-  def match(%{message: %{text: "hi"} } = update,%{token: token} = bot_settings) do
-    Nadia.send_message(token,get_chat_id(update),"Well, hello there! #{update.message.from.first_name}")
-  end
-  def match(update,%{token: token}) do
-    Nadia.send_message(token,get_chat_id(update), "Sorry, that command is NOT yet implemented!")
-  end
-  def get_chat_id(update) do
-    case update do
-       %{inline_query: inline_query} when not is_nil(inline_query) ->
-         inline_query.from.id
-       %{callback_query: callback_query} when not is_nil(callback_query) ->
-         callback_query.message.chat.id
-       %{message: %{chat: %{id: id}}} when not is_nil(id) ->
-         id
-       %{edited_message: %{chat: %{id: id}}} when not is_nil(id) ->
-         id
-       %{channel_post: %{chat: %{id: id}}} when not is_nil(id) ->
-         id
-       _ -> raise "No chat id found!"
-     end
-    end
+
 
 end
