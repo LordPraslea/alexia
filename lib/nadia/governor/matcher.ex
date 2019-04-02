@@ -23,7 +23,6 @@ defmodule Nadia.Governor.Matcher do
 
   #Run command in task
   def handle_cast({message,token}, state) do
-  #  Commands.match_message message
     Task.start fn ->
       apply(state.commands_module, :command, [message,token])
     end

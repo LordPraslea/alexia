@@ -130,7 +130,7 @@ defmodule Nadia.API do
   Use this function to build file url.
 
   iex> Nadia.API.build_file_url("bot_token","document/file_10")
-  "https://api.telegram.org/file/bot#{bot_token}/document/file_10"
+  "https://api.telegram.org/file/botbot_token/document/file_10"
   """
   @spec build_file_url(binary,binary) :: binary
   def build_file_url(token,file_path) do

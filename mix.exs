@@ -35,6 +35,7 @@ defmodule Nadia.Mixfile do
       {:httpoison, "~> 1.5.0"},
       {:poison, "~> 3.0"}, #4.0.1 Breaks dependency with sqlite
       {:exvcr, "~> 0.10.1", only: [:dev, :test]},
+      {:bypass, "~> 1.0", only: [:test, :dev]},
       {:earmark, "~> 1.3.2", only: :docs},
       {:ex_doc, "~> 0.18.3", only: :docs},
       {:inch_ex, "~> 2.0.0", only: :docs}

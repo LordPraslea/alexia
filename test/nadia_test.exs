@@ -1,8 +1,9 @@
 defmodule NadiaTest do
   use ExUnit.Case, async: false
-  use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
+#  use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
   doctest Nadia, only: [get_file_link: 1]
   alias Nadia.Model.User
+  require Logger
 
   setup_all do
     unless Application.get_env(:nadia, :token) do
@@ -13,55 +14,71 @@ defmodule NadiaTest do
   end
 
   setup do
-    ExVCR.Config.filter_sensitive_data("bot[^/]+/", "bot<TOKEN>/")
-    ExVCR.Config.filter_sensitive_data("id\":\\d+", "id\":666")
-    ExVCR.Config.filter_sensitive_data("id=\\d+", "id=666")
-    ExVCR.Config.filter_sensitive_data("_id=@w+", "_id=@group")
-    :ok
+    bypass = Bypass.open()
+    Application.put_env(:nadia, :base_url, "http://localhost:#{bypass.port}/")
+    {:ok, bypass: bypass}
   end
 
-  test "get_me" do
-    use_cassette "get_me" do
-      {:ok, me} = Nadia.get_me()
-      assert me == %User{id: 666, first_name: "Nadia", username: "nadia_bot"}
-    end
+  test "get_me", %{bypass: bypass} do
+      Bypass.expect(bypass, fn conn ->
+        Plug.Conn.resp(conn, 200, Poison.encode!(
+        %{ok: true, result: %{id: 777,  username: "TelexiaBot"}}))
+        end)
+
+      assert  {:ok, %User{id: 777,  username: "TelexiaBot"}} = Nadia.get_me(Nadia.Config.token())
   end
 
-  test "send_message" do
-    use_cassette "send_message" do
-      {:ok, message} = Nadia.send_message(666, "aloha")
-      assert message.text == "aloha"
-    end
+  test "outage or connection refused", %{bypass: bypass} do
+      Bypass.down(bypass)
+      assert {:error, %Nadia.Model.Error{reason: :econnrefused}} = Nadia.get_me(Nadia.Config.token())
   end
 
-  test "forward_message" do
-    use_cassette "forward_message" do
-      {:ok, message} = Nadia.forward_message(666, 666, 666)
+  test "send_message", %{bypass: bypass} do
+    data = %{message_id: 777, text: "Hey There!"}
+    Bypass.expect(bypass, fn conn ->
+      Plug.Conn.resp(conn, 200, Poison.encode!(%{ok: true, result: data}))
+      end)
+      {:ok, message} = Nadia.send_message(Nadia.Config.token(),777, "Hey There!")
+      assert message.text == "Hey There!"
+
+  end
+
+  test "forward_message", %{bypass: bypass} do
+    data = %{forward_date: 123456798, forward_from: %{username: "SomeRandomDude", id: 72551}}
+    Bypass.expect(bypass, fn conn ->
+      Plug.Conn.resp(conn, 200, Poison.encode!(%{ok: true, result: data}))
+    end)
+
+      {:ok, message} = Nadia.forward_message(Nadia.Config.token(),777, 777, 777)
       refute is_nil(message.forward_date)
       refute is_nil(message.forward_from)
-    end
+
   end
 
-  test "send_photo" do
-    use_cassette "send_photo" do
-      file_id = "AgADBQADq6cxG7Vg2gSIF48DtOpj4-edszIABGGN5AM6XKzcLjwAAgI"
-      {:ok, message} = Nadia.send_photo(666, file_id)
+  test "send_photo", %{bypass: bypass} do
+    file_id = "AgADBQADq6cxG7Vg2gSIF48DtOpj4-edszIABGGN5AM6XKzcLjwAAgI"
+    data = %{photo: [%{file_id: file_id}]}
+    Bypass.expect(bypass, fn conn ->
+      Plug.Conn.resp(conn, 200, Poison.encode!(%{ok: true, result: data}))
+    end)
+
+      {:ok, message} = Nadia.send_photo(Nadia.Config.token(),777, file_id)
       assert is_list(message.photo)
       assert Enum.any?(message.photo, &(&1.file_id == file_id))
-    end
+
   end
 
-  test "send_sticker" do
-    use_cassette "send_sticker" do
-      {:ok, message} = Nadia.send_sticker(666, "BQADBQADBgADmEjsA1aqdSxtzvvVAg")
+  test "send_sticker", %{bypass: bypass} do
+      {:ok, message} = Nadia.send_sticker(Nadia.Config.token(),777, "BQADBQADBgADmEjsA1aqdSxtzvvVAg")
       refute is_nil(message.sticker)
       assert message.sticker.file_id == "BQADBQADBgADmEjsA1aqdSxtzvvVAg"
-    end
   end
+~S"""
+
 
   test "send_contact" do
     use_cassette "send_contact" do
-      {:ok, message} = Nadia.send_contact(666, 10_123_800_555, "Test")
+      {:ok, message} = Nadia.send_contact(Nadia.Config.token(),666, 10_123_800_555, "Test")
       refute is_nil(message.contact)
       assert message.contact.phone_number == "10123800555"
       assert message.contact.first_name == "Test"
@@ -70,7 +87,7 @@ defmodule NadiaTest do
 
   test "send_location" do
     use_cassette "send_location" do
-      {:ok, message} = Nadia.send_location(666, 1, 2)
+      {:ok, message} = Nadia.send_location(Nadia.Config.token(),666, 1, 2)
       refute is_nil(message.location)
       assert_in_delta message.location.latitude, 1, 1.0e-3
       assert_in_delta message.location.longitude, 2, 1.0e-3
@@ -79,7 +96,7 @@ defmodule NadiaTest do
 
   test "send_venue" do
     use_cassette "send_venue" do
-      {:ok, message} = Nadia.send_venue(666, 1, 2, "Test", "teststreet")
+      {:ok, message} = Nadia.send_venue(Nadia.Config.token(),666, 1, 2, "Test", "teststreet")
       refute is_nil(message.venue)
       assert_in_delta message.venue.location.latitude, 1, 1.0e-3
       assert_in_delta message.venue.location.longitude, 2, 1.0e-3
@@ -90,13 +107,13 @@ defmodule NadiaTest do
 
   test "send_chat_action" do
     use_cassette "send_chat_action" do
-      assert Nadia.send_chat_action(666, "typing") == :ok
+      assert Nadia.send_chat_action(Nadia.Config.token(),666, "typing") == :ok
     end
   end
 
   test "get_user_profile_photos" do
     use_cassette "get_user_profile_photos" do
-      {:ok, user_profile_photos} = Nadia.get_user_profile_photos(666)
+      {:ok, user_profile_photos} = Nadia.get_user_profile_photos(Nadia.Config.token(),666)
       assert user_profile_photos.total_count == 1
       refute is_nil(user_profile_photos.photos)
     end
@@ -104,14 +121,14 @@ defmodule NadiaTest do
 
   test "get_updates" do
     use_cassette "get_updates" do
-      {:ok, updates} = Nadia.get_updates(limit: 1)
+      {:ok, updates} = Nadia.get_updates(Nadia.Config.token(),limit: 1)
       assert length(updates) == 1
     end
   end
 
   test "set webhook" do
     use_cassette "set_webhook" do
-      assert Nadia.set_webhook(url: "https://telegram.org/") == :ok
+      assert Nadia.set_webhook(Nadia.Config.token(),url: "https://telegram.org/") == :ok
     end
   end
 
@@ -127,19 +144,19 @@ defmodule NadiaTest do
         url: ""
       }
 
-      assert Nadia.get_webhook_info() == {:ok, webhook_info}
+      assert Nadia.get_webhook_info(Nadia.Config.token()) == {:ok, webhook_info}
     end
   end
 
   test "delete webhook" do
     use_cassette "delete_webhook" do
-      assert Nadia.delete_webhook() == :ok
+      assert Nadia.delete_webhook(Nadia.Config.token()) == :ok
     end
   end
 
   test "get_file" do
     use_cassette "get_file" do
-      {:ok, file} = Nadia.get_file("BQADBQADBgADmEjsA1aqdSxtzvvVAg")
+      {:ok, file} = Nadia.get_file(Nadia.Config.token(),"BQADBQADBgADmEjsA1aqdSxtzvvVAg")
       refute is_nil(file.file_path)
       assert file.file_id == "BQADBQADBgADmEjsA1aqdSxtzvvVAg"
     end
@@ -152,7 +169,7 @@ defmodule NadiaTest do
       file_size: 17680
     }
 
-    {:ok, file_link} = Nadia.get_file_link(file)
+    {:ok, file_link} = Nadia.get_file_link(Nadia.Config.token(),file)
 
     assert file_link ==
              "https://api.telegram.org/file/bot#{Nadia.Config.token()}/document/file_10"
@@ -175,7 +192,7 @@ defmodule NadiaTest do
 
   test "get_chat_administrators" do
     use_cassette "get_chat_administrators" do
-      {:ok, [admin | [creator]]} = Nadia.get_chat_administrators("@group")
+      {:ok, [admin | [creator]]} = Nadia.get_chat_administrators(Nadia.Config.token(),"@group")
       assert admin.status == "administrator"
       assert admin.user.username == "nadia_bot"
       assert creator.status == "creator"
@@ -185,14 +202,14 @@ defmodule NadiaTest do
 
   test "get_chat_members_count" do
     use_cassette "get_chat_members_count" do
-      {:ok, count} = Nadia.get_chat_members_count("@group")
+      {:ok, count} = Nadia.get_chat_members_count(Nadia.Config.token(),"@group")
       assert count == 2
     end
   end
 
   test "leave_chat" do
     use_cassette "leave_chat" do
-      assert Nadia.leave_chat("@group") == :ok
+      assert Nadia.leave_chat(Nadia.Config.token(),"@group") == :ok
     end
   end
 
@@ -206,7 +223,8 @@ defmodule NadiaTest do
     }
 
     use_cassette "answer_inline_query" do
-      assert :ok == Nadia.answer_inline_query(666, [photo])
+      assert :ok == Nadia.answer_inline_query(Nadia.Config.token(),666, [photo])
     end
   end
+"""
 end

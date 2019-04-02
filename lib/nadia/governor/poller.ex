@@ -20,26 +20,35 @@ defmodule Nadia.Governor.Poller do
   def init(%{name: name} = settings) do
     {:ok, matcher_pid} = Supervisor.start_child(Nadia.Supervisor.Matcher,
       Supervisor.child_spec({Nadia.Governor.Matcher, settings}, id: settings.bot_name ))
-    Logger.log :info, "Matcher should have been started? #{inspect matcher_pid}"
-    update(name)
+      update(name)
     {:ok, Map.put(settings,:matcher, matcher_pid)}
   end
 
   def handle_cast(:update, %{offset: offset, token: token} = state) do
     new_offset = Nadia.get_updates(token,[offset: offset])
                  |> process_messages(state)
+    #  IO.puts "Offset differences old #{offset} new #{new_offset}"
     {:noreply, Map.put(state,:offset,new_offset + 1), 1000}
   end
 
+  def timeout() do
+
+  end
   # ^ Default Timeout of 1 second. ^
-  #TODO if it goes for 1 minute without any message then boost the timeout
-  #to 5-10 seconds and put ti back to 1 second once receiving a message
+  #TODO if it goes for 5 minute without any message then boost the timeout
+  #to 2 seconds and put ti back to 1 second once receiving a message
+  # 5 minutes 2 seconds
+  # 10 minutes 3 seconds
+  # 20 minutes 4 seconds
+  # 30 minutes 5 seconds
+  # 1 hour+ rand 5 - 10 seconds
   #This way for multiple bots it won't spam the telegram servers for updates
   #unnecessarily
   def handle_info(:timeout, %{name: name} = state) do
     update(name)
     {:noreply, state}
   end
+
 
   @doc  """
   There is a known problem in SSL Erlang where you get the following error
@@ -62,6 +71,7 @@ defmodule Nadia.Governor.Poller do
   def update(name) do
     GenServer.cast name, :update
   end
+
 
   # Helpers
 
@@ -88,7 +98,7 @@ defmodule Nadia.Governor.Poller do
   defp process_message(nil,_state), do: IO.puts "nil"
   defp process_message(message,bot_settings) do
     try do
-      IO.puts "#{inspect bot_settings.matcher}, #{inspect message},#{bot_settings.token}"
+      Logger.debug "#{bot_settings.bot_name} #{inspect bot_settings.matcher} \n #{inspect message}"
       Nadia.Governor.Matcher.match bot_settings.matcher, message,bot_settings.token
     #  match(message,bot_settings)
     rescue
