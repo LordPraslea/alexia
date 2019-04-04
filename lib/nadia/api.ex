@@ -43,6 +43,12 @@ defmodule Nadia.API do
   defp calculate_timeout(options) when is_map(options) do
     (Map.get(options, :timeout, 0) + Config.recv_timeout()) * 1000
   end
+  #Usage for media
+  defp build_request(params, file_field) when is_list(params) and file_field == :media do
+    params
+    |> Keyword.update(:media, nil, &Poison.encode!(&1))
+    |> map_params(file_field)
+  end
 
   defp build_request(params, file_field) when is_list(params) do
     params
@@ -55,12 +61,12 @@ defmodule Nadia.API do
     |> Map.update(:reply_markup, nil, &Poison.encode!(&1))
     |> map_params(file_field)
   end
-
+      #  if(!is_list(v), do:  {k, to_string(v)},  else:  Poison.encode!(v))
   defp map_params(params, file_field) do
     params =
       params
       |> Enum.filter(fn {_, v} -> v end)
-      |> Enum.map(fn {k, v} -> {k, to_string(v)} end)
+      |> Enum.map(fn {k, v} ->  {k, to_string(v)}  end)
 
     if !is_nil(file_field) and File.exists?(params[file_field]) do
       build_multipart_request(params, file_field)

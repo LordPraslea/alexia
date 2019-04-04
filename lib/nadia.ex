@@ -731,4 +731,25 @@ defmodule Nadia do
 
     request("answerInlineQuery",token, args ++ options)
   end
+
+
+  @doc """
+  Use this method to send a group of photos or videos as an album.
+  On success, an array of the sent Messages is returned.
+
+  Args:
+  * `token` - Unique bot token
+  * `chat_id` - Unique identifier for the target chat or username of the target channel
+  (in the format @channelusername)
+  * `media` -  	Array of `Nadia.Model.InputMediaPhoto`  and `Nadia.Model.InputMediaVideo`
+  * `options` - orddict of options
+
+  Options:
+  * `:disable_notification` - Sends the message silently or without notification
+  * `:reply_to_message_id` - If the message is a reply, ID of the original message
+  """
+  @spec send_media_group(binary, integer, [Nadia.Model.InputMediaPhoto.t()], [{atom, any}]) :: {:ok, Message.t()} | {:error, Error.t()}
+  def send_media_group(token,chat_id, media, options \\ []) do
+    request("sendMediaGroup", token, [chat_id: chat_id, media: media] ++ options, :media)
+  end
 end

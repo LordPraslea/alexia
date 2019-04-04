@@ -41,6 +41,7 @@ defmodule Nadia.Parser do
       "getChatMember" -> parse(ChatMember, result)
       "getChatAdministrators" -> parse(:chat_members, result)
       "getChatMembersCount" -> result
+      "sendMediaGroup" -> parse(:messages,result)
       _ -> parse(Message, result)
     end
   end
@@ -52,6 +53,7 @@ defmodule Nadia.Parser do
   @keys_of_photo [:photo, :new_chat_photo]
   @keys_of_user [:from, :forward_from, :new_chat_participant, :left_chat_participant]
 
+  defp parse(:messages, l) when is_list(l), do: Enum.map(l, &parse(Message, &1))
   defp parse(:photo, l) when is_list(l), do: Enum.map(l, &parse(PhotoSize, &1))
   defp parse(:photo, p), do: parse(ChatPhoto, p)
   defp parse(:photos, l) when is_list(l), do: Enum.map(l, &parse(:photo, &1))

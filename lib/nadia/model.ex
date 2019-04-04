@@ -351,6 +351,11 @@ defmodule Nadia.Model do
           }
   end
 
+  defmodule InputMediaPhoto do
+    defstruct type: nil, media: nil, caption: nil, parse_mode: nil
+    @type t :: %InputMediaPhoto{type: binary, media: integer, caption: binary, parse_mode: binary}
+  end
+
   defmodule Error do
     defexception reason: nil
     @type t :: %Error{reason: any}
