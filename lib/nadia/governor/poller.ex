@@ -98,15 +98,11 @@ defmodule Nadia.Governor.Poller do
   defp process_message(nil,_state), do: IO.puts "nil"
   defp process_message(message,bot_settings) do
     try do
-      Logger.debug "#{bot_settings.bot_name} #{inspect bot_settings.matcher} \n #{inspect message}"
       Nadia.Governor.Matcher.match bot_settings.matcher, message,bot_settings.token
-    #  match(message,bot_settings)
     rescue
       err in MatchError ->
         Logger.log :warn, "Errored with #{err} at #{Poison.encode! message}"
     end
   end
-
-
 
 end

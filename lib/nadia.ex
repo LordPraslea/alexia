@@ -207,9 +207,9 @@ defmodule Nadia do
   force a reply from the user - `Nadia.Model.ReplyKeyboardMarkup` or
   `Nadia.Model.ReplyKeyboardHide` or `Nadia.Model.ForceReply`
   """
-  @spec send_video(integer, binary, [{atom, any}]) :: {:ok, Message.t()} | {:error, Error.t()}
-  def send_video(chat_id, video, options \\ []) do
-    request("sendVideo", [chat_id: chat_id, video: video] ++ options, :video)
+  @spec send_video(binary,integer, binary, [{atom, any}]) :: {:ok, Message.t()} | {:error, Error.t()}
+  def send_video(token,chat_id, video, options \\ []) do
+    request("sendVideo",token, [chat_id: chat_id, video: video] ++ options, :video)
   end
 
   @doc """
