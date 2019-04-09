@@ -11,7 +11,7 @@
       "url": "https://api.telegram.org/bot<TOKEN>/getChatAdministrators"
     },
     "response": {
-      "body": "{\"ok\":true,\"result\":[{\"user\":{\"id\":666,\"first_name\":\"Nadia\",\"username\":\"nadia_bot\"},\"status\":\"administrator\"},{\"user\":{\"id\":666,\"first_name\":\"GroupCreator\",\"username\":\"group_creator\"},\"status\":\"creator\"}]}",
+      "body": "{\"ok\":true,\"result\":[{\"user\":{\"id\":666,\"first_name\":\"Alexia\",\"username\":\"alexia_bot\"},\"status\":\"administrator\"},{\"user\":{\"id\":666,\"first_name\":\"GroupCreator\",\"username\":\"group_creator\"},\"status\":\"creator\"}]}",
       "headers": {
         "Server": "nginx/1.10.0",
         "Date": "Tue, 24 May 2016 08:56:35 GMT",

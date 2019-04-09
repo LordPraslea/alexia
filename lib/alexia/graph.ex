@@ -1,4 +1,4 @@
-defmodule Nadia.Graph do
+defmodule Alexia.Graph do
   @moduledoc """
   Provides access to Telegra.ph API.
 
@@ -6,9 +6,9 @@ defmodule Nadia.Graph do
   http://telegra.ph/api
   """
 
-  alias Nadia.Graph.Model.{Account, Error}
+  alias Alexia.Graph.Model.{Account, Error}
 
-  import Nadia.Graph.API
+  import Alexia.Graph.API
 
   @doc """
   Use this method to create a new Telegraph account. Most users only need one account, but this can be useful for channel administrators who would like to keep individual author names and profile links for each of their channels. On success, returns an Account object with the regular fields and an additional access_token field.

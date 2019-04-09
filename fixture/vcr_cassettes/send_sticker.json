@@ -8,7 +8,7 @@
       "url": "https://api.telegram.org/bot<TOKEN>/sendSticker"
     },
     "response": {
-      "body": "{\"ok\":true,\"result\":{\"message_id\":666,\"from\":{\"id\":666,\"first_name\":\"Nadia\",\"username\":\"nadia_bot\"},\"chat\":{\"id\":666,\"first_name\":\"Yu\",\"last_name\":\"Zhang\",\"username\":\"angellwings\",\"type\":\"private\"},\"date\":1444613737,\"sticker\":{\"width\":512,\"height\":512,\"thumb\":{\"file_id\":\"AAQFABNMdrMyAAR-0JXX3cuRxXsGAAIC\",\"file_size\":3800,\"width\":128,\"height\":128},\"file_id\":\"BQADBQADBgADmEjsA1aqdSxtzvvVAg\"}}}",
+      "body": "{\"ok\":true,\"result\":{\"message_id\":666,\"from\":{\"id\":666,\"first_name\":\"Alexia\",\"username\":\"alexia_bot\"},\"chat\":{\"id\":666,\"first_name\":\"Yu\",\"last_name\":\"Zhang\",\"username\":\"angellwings\",\"type\":\"private\"},\"date\":1444613737,\"sticker\":{\"width\":512,\"height\":512,\"thumb\":{\"file_id\":\"AAQFABNMdrMyAAR-0JXX3cuRxXsGAAIC\",\"file_size\":3800,\"width\":128,\"height\":128},\"file_id\":\"BQADBQADBgADmEjsA1aqdSxtzvvVAg\"}}}",
       "headers": {
         "Server": "nginx/1.6.2",
         "Date": "Mon, 12 Oct 2015 01:35:37 GMT",

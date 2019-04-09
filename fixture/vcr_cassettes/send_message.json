@@ -8,7 +8,7 @@
       "url": "https://api.telegram.org/bot<TOKEN>/sendMessage"
     },
     "response": {
-      "body": "{\"ok\":true,\"result\":{\"message_id\":666,\"from\":{\"id\":666,\"first_name\":\"Nadia\",\"username\":\"nadia_bot\"},\"chat\":{\"id\":666,\"first_name\":\"Yu\",\"last_name\":\"Zhang\",\"username\":\"angellwings\",\"type\":\"private\"},\"date\":1444613738,\"text\":\"aloha\"}}",
+      "body": "{\"ok\":true,\"result\":{\"message_id\":666,\"from\":{\"id\":666,\"first_name\":\"Alexia\",\"username\":\"alexia_bot\"},\"chat\":{\"id\":666,\"first_name\":\"Yu\",\"last_name\":\"Zhang\",\"username\":\"angellwings\",\"type\":\"private\"},\"date\":1444613738,\"text\":\"aloha\"}}",
       "headers": {
         "Server": "nginx/1.6.2",
         "Date": "Mon, 12 Oct 2015 01:35:39 GMT",

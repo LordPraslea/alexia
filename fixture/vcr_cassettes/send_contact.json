@@ -8,7 +8,7 @@
       "url": "https://api.telegram.org/bot<TOKEN>/sendContact"
     },
     "response": {
-      "body": "{\"ok\":true,\"result\":{\"message_id\":666,\"from\":{\"id\":666,\"first_name\":\"Nadia\",\"username\":\"nadia_bot\"},\"chat\":{\"id\":666,\"first_name\":\"Yu\",\"last_name\":\"Zhang\",\"username\":\"angellwings\",\"type\":\"private\"},\"date\":1460622208,\"contact\":{\"phone_number\":\"10123800555\",\"first_name\":\"Test\"}}}",
+      "body": "{\"ok\":true,\"result\":{\"message_id\":666,\"from\":{\"id\":666,\"first_name\":\"Alexia\",\"username\":\"alexia_bot\"},\"chat\":{\"id\":666,\"first_name\":\"Yu\",\"last_name\":\"Zhang\",\"username\":\"angellwings\",\"type\":\"private\"},\"date\":1460622208,\"contact\":{\"phone_number\":\"10123800555\",\"first_name\":\"Test\"}}}",
       "headers": {
         "Server": "nginx/1.9.1",
         "Date": "Thu, 14 Apr 2016 07:53:30 GMT",

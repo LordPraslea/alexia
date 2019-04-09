@@ -1,7 +1,7 @@
-defmodule Nadia.GraphTest do
+defmodule Alexia.GraphTest do
   use ExUnit.Case
   use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
-  doctest Nadia.Graph
+  doctest Alexia.Graph
 
   setup_all do
     ExVCR.Config.filter_sensitive_data("bot[^/]+/", "bot<TOKEN>/")
@@ -13,7 +13,7 @@ defmodule Nadia.GraphTest do
 
   test "create_account" do
     use_cassette "graph/create_account" do
-      {:ok, account} = Nadia.Graph.create_account("some_short_name", "some_author_name")
+      {:ok, account} = Alexia.Graph.create_account("some_short_name", "some_author_name")
       assert account.short_name == "some_short_name"
     end
   end
@@ -21,7 +21,7 @@ defmodule Nadia.GraphTest do
   test "edit_account_info" do
     use_cassette "graph/edit_account_info" do
       {:ok, account} =
-        Nadia.Graph.edit_account_info(
+        Alexia.Graph.edit_account_info(
           "b968da509bb76866c35425099bc0989a5ec3b32997d55286c657e6994bbb",
           "some_short_name",
           "some_author_name"
@@ -34,7 +34,7 @@ defmodule Nadia.GraphTest do
   test "get_account_info" do
     use_cassette "graph/get_account_info" do
       {:ok, account} =
-        Nadia.Graph.get_account_info(
+        Alexia.Graph.get_account_info(
           "b968da509bb76866c35425099bc0989a5ec3b32997d55286c657e6994bbb",
           ["short_name", "page_count"]
         )
@@ -46,7 +46,7 @@ defmodule Nadia.GraphTest do
   test "revoke_access_token" do
     use_cassette "graph/revoke_access_token" do
       {:ok, account} =
-        Nadia.Graph.revoke_access_token(
+        Alexia.Graph.revoke_access_token(
           "b968da509bb76866c35425099bc0989a5ec3b32997d55286c657e6994bbb"
         )
 
@@ -57,7 +57,7 @@ defmodule Nadia.GraphTest do
   test "get_page_list" do
     use_cassette "graph/get_page_list" do
       {:ok, page_list} =
-        Nadia.Graph.get_page_list(
+        Alexia.Graph.get_page_list(
           "b968da509bb76866c35425099bc0989a5ec3b32997d55286c657e6994bbb",
           0,
           3
@@ -71,7 +71,7 @@ defmodule Nadia.GraphTest do
   test "create_page" do
     use_cassette "graph/create_page" do
       {:ok, page} =
-        Nadia.Graph.create_page(
+        Alexia.Graph.create_page(
           "b968da509bb76866c35425099bc0989a5ec3b32997d55286c657e6994bbb",
           "Sample Page",
           "[{\"tag\":\"p\",\"children\":[\"Hello,+world!\"]}]"
@@ -83,7 +83,7 @@ defmodule Nadia.GraphTest do
 
   test "get_page" do
     use_cassette "graph/get_page" do
-      {:ok, page} = Nadia.Graph.get_page("Sample-Page-12-15")
+      {:ok, page} = Alexia.Graph.get_page("Sample-Page-12-15")
       assert page.title == "Sample Page"
       assert page.content != nil
     end
@@ -92,7 +92,7 @@ defmodule Nadia.GraphTest do
   test "edit_page" do
     use_cassette "graph/edit_page" do
       {:ok, page} =
-        Nadia.Graph.edit_page(
+        Alexia.Graph.edit_page(
           "b968da509bb76866c35425099bc0989a5ec3b32997d55286c657e6994bbb",
           "Sample-Page-12-15",
           "Some Page2",
@@ -105,7 +105,7 @@ defmodule Nadia.GraphTest do
 
   test "get_views" do
     use_cassette "graph/get_views" do
-      {:ok, result} = Nadia.Graph.get_views("Sample-Page-12-15", year: 2012, month: 12)
+      {:ok, result} = Alexia.Graph.get_views("Sample-Page-12-15", year: 2012, month: 12)
       assert result.views == 40
     end
   end

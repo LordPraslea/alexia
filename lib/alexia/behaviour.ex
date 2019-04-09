@@ -1,5 +1,5 @@
-defmodule Nadia.Behaviour do
-  alias Nadia.Model.{User, Message, Update, UserProfilePhotos, File, Error}
+defmodule Alexia.Behaviour do
+  alias Alexia.Model.{User, Message, Update, UserProfilePhotos, File, Error}
 
   @callback get_me(binary) :: {:ok, User.t()} | {:error, Error.t()}
   @callback send_message(binary, integer, binary, [{atom, any}]) ::
@@ -42,6 +42,6 @@ defmodule Nadia.Behaviour do
               {:ok, Message.t()} | {:error, Error.t()}
   @callback edit_message_reply_markup(binary,integer | binary, integer, binary, [{atom, any}]) ::
               {:ok, Message.t()} | {:error, Error.t()}
-  @callback answer_inline_query(binary, binary, [Nadia.Model.InlineQueryResult.t()], [{atom, any}]) ::
+  @callback answer_inline_query(binary, binary, [Alexia.Model.InlineQueryResult.t()], [{atom, any}]) ::
               :ok | {:error, Error.t()}
 end

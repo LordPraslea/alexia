@@ -1,4 +1,4 @@
-defmodule Nadia.Governor.Matcher do
+defmodule Alexia.Governor.Matcher do
   @moduledoc """
       Each Bot has a Matcher GenServer which runs independent
       spawned_links for the functions and modules to run the commands

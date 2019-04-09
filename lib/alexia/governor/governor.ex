@@ -1,4 +1,4 @@
-defmodule Nadia.Governor do
+defmodule Alexia.Governor do
 
   def get_chat_id(update) do
     case update do

@@ -1,9 +1,9 @@
-defmodule Nadia.Mixfile do
+defmodule Alexia.Mixfile do
   use Mix.Project
 
   def project do
     [
-      app: :nadia,
+      app: :alexia,
       version: "0.5.0",
       elixir: "~> 1.6",
       description: "Telegram Bot API Wrapper written in Elixir",
@@ -33,7 +33,7 @@ defmodule Nadia.Mixfile do
   defp deps do
     [
       {:httpoison, "~> 1.5.0"},
-      {:poison, "~> 3.0"}, #4.0.1 Breaks dependency with sqlite
+      {:poison, "~> 3.0"}, #4.0.1 Breaks dependency with sqlite in ecto 2
       {:exvcr, "~> 0.10.1", only: [:dev, :test]},
       {:bypass, "~> 1.0", only: [:test, :dev]},
       {:earmark, "~> 1.3.2", only: :docs},
@@ -46,7 +46,7 @@ defmodule Nadia.Mixfile do
     [
       maintainers: ["zhyu"],
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/zhyu/nadia"}
+      links: %{"Fossil" => "https://lba.im"}
     ]
   end
 end

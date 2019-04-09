@@ -1,12 +1,12 @@
 defmodule Testing do
-      alias Nadia.Model
-      alias Nadia.Model.{InlineQueryResult}
-      alias Nadia.Governor
+      alias Alexia.Model
+      alias Alexia.Model.{InlineQueryResult}
+      alias Alexia.Governor
       require Logger
   def text_command("/question",update,token)  do
-    {:ok, _} =   Nadia.send_message(token,Nadia.Governor.get_chat_id(update),
+    {:ok, _} =   Alexia.send_message(token,Alexia.Governor.get_chat_id(update),
     "Which color do you like most?",
-    # See also: https://hexdocs.pm/nadia/Nadia.Model.InlineKeyboardMarkup.html
+    # See also: https://hexdocs.pm/alexia/Alexia.Model.InlineKeyboardMarkup.html
     reply_markup: %Model.InlineKeyboardMarkup{
       inline_keyboard: [
         [
@@ -28,7 +28,7 @@ defmodule Testing do
   end
 
   def text_command("/power",update,token)  do
-    {:ok, _} =   Nadia.send_message(token,Nadia.Governor.get_chat_id(update), "Who's the best?",
+    {:ok, _} =   Alexia.send_message(token,Alexia.Governor.get_chat_id(update), "Who's the best?",
 
     reply_markup: %Model.ReplyKeyboardMarkup{
       one_time_keyboard: true,
@@ -58,16 +58,16 @@ defmodule Testing do
 
     case update.callback_query.data do
       "/choose blue" ->
-        Nadia.answer_callback_query token, update.callback_query.id,
+        Alexia.answer_callback_query token, update.callback_query.id,
          text: "Indeed you have good taste."
       "/choose green" ->
-        Nadia.answer_callback_query token, update.callback_query.id,
+        Alexia.answer_callback_query token, update.callback_query.id,
          text: "I can't agree more."
     end
   end
 
   def inline_query_command("troll",update,token) do
-    :ok = Nadia.answer_inline_query token, update.inline_query.id, [
+    :ok = Alexia.answer_inline_query token, update.inline_query.id, [
           %InlineQueryResult.Article{
             id: "1",
             title: "TROLLS OFFICIAL TRAILER!",

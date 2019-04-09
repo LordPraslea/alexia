@@ -1,4 +1,4 @@
-defmodule Nadia.Governor.Poller do
+defmodule Alexia.Governor.Poller do
     @moduledoc """
       Creates a continuous poller for each BOT keeping the state intact.
       It's possible to run multiple bots, each in it's own state with it's own poller.
@@ -18,14 +18,14 @@ defmodule Nadia.Governor.Poller do
   end
 
   def init(%{name: name} = settings) do
-    {:ok, matcher_pid} = Supervisor.start_child(Nadia.Supervisor.Matcher,
-      Supervisor.child_spec({Nadia.Governor.Matcher, settings}, id: settings.bot_name ))
+    {:ok, matcher_pid} = Supervisor.start_child(Alexia.Supervisor.Matcher,
+      Supervisor.child_spec({Alexia.Governor.Matcher, settings}, id: settings.bot_name ))
       update(name)
     {:ok, Map.put(settings,:matcher, matcher_pid)}
   end
 
   def handle_cast(:update, %{offset: offset, token: token} = state) do
-    new_offset = Nadia.get_updates(token,[offset: offset])
+    new_offset = Alexia.get_updates(token,[offset: offset])
                  |> process_messages(state)
     #  IO.puts "Offset differences old #{offset} new #{new_offset}"
     {:noreply, Map.put(state,:offset,new_offset + 1), 1000}
@@ -86,7 +86,7 @@ defmodule Nadia.Governor.Poller do
     end)
     |> List.last
   end
-  defp process_messages({:error, %Nadia.Model.Error{reason: reason}},_state) do
+  defp process_messages({:error, %Alexia.Model.Error{reason: reason}},_state) do
     Logger.log :error, reason
     -1
   end
@@ -98,7 +98,7 @@ defmodule Nadia.Governor.Poller do
   defp process_message(nil,_state), do: IO.puts "nil"
   defp process_message(message,bot_settings) do
     try do
-      Nadia.Governor.Matcher.match bot_settings.matcher, message,bot_settings.token
+      Alexia.Governor.Matcher.match bot_settings.matcher, message,bot_settings.token
     rescue
       err in MatchError ->
         Logger.log :warn, "Errored with #{err} at #{Poison.encode! message}"

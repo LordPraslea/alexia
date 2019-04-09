@@ -1,4 +1,4 @@
-defmodule Nadia.Supervisor.Poller do
+defmodule Alexia.Supervisor.Poller do
   @moduledoc  """
     Bot Poller Supervisor
   """
@@ -11,7 +11,7 @@ defmodule Nadia.Supervisor.Poller do
   def init(bots) do
     children  =   Enum.map(bots,fn (bot) ->
       #:crypto.strong_rand_bytes(5) |> Base.encode32
-      Supervisor.child_spec({Nadia.Governor.Poller, bot}, id: bot.bot_name )
+      Supervisor.child_spec({Alexia.Governor.Poller, bot}, id: bot.bot_name )
     end)
 
     Supervisor.init(children, strategy: :one_for_one)

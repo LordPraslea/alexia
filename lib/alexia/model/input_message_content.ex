@@ -1,9 +1,9 @@
-defmodule Nadia.Model.InputMessageContent do
+defmodule Alexia.Model.InputMessageContent do
   @type t ::
-          Nadia.Model.InputMessageContent.Text.t()
-          | Nadia.Model.InputMessageContent.Location.t()
-          | Nadia.Model.InputMessageContent.Venue.t()
-          | Nadia.Model.InputMessageContent.Contact.t()
+          Alexia.Model.InputMessageContent.Text.t()
+          | Alexia.Model.InputMessageContent.Location.t()
+          | Alexia.Model.InputMessageContent.Venue.t()
+          | Alexia.Model.InputMessageContent.Contact.t()
 
   defmodule Text do
     defstruct message_text: nil, parse_mode: nil, disable_web_page_preview: false

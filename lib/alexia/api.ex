@@ -1,10 +1,10 @@
-defmodule Nadia.API do
+defmodule Alexia.API do
   @moduledoc """
   Provides basic functionalities for Telegram Bot API.
   """
 
-  alias Nadia.Model.Error
-  alias Nadia.Config
+  alias Alexia.Model.Error
+  alias Alexia.Config
 
   defp build_url(method,token), do: Config.base_url() <> token <> "/" <> method
 
@@ -12,7 +12,7 @@ defmodule Nadia.API do
     case decode_response(response) do
       {:ok, true} -> :ok
       {:ok, %{ok: false, description: description}} -> {:error, %Error{reason: description}}
-      {:ok, result} -> {:ok, Nadia.Parser.parse_result(result, method)}
+      {:ok, result} -> {:ok, Alexia.Parser.parse_result(result, method)}
       {:error, %HTTPoison.Error{reason: reason}} -> {:error, %Error{reason: reason}}
       {:error, error} -> {:error, %Error{reason: error}}
     end
@@ -135,7 +135,7 @@ defmodule Nadia.API do
   @doc ~S"""
   Use this function to build file url.
 
-  iex> Nadia.API.build_file_url("bot_token","document/file_10")
+  iex> Alexia.API.build_file_url("bot_token","document/file_10")
   "https://api.telegram.org/file/botbot_token/document/file_10"
   """
   @spec build_file_url(binary,binary) :: binary

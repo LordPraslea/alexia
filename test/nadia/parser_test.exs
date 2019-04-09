@@ -1,9 +1,9 @@
-defmodule Nadia.ParserTest do
+defmodule Alexia.ParserTest do
   use ExUnit.Case, async: true
 
-  alias Nadia.Parser
+  alias Alexia.Parser
 
-  alias Nadia.Model.{
+  alias Alexia.Model.{
     Update,
     InlineQuery,
     CallbackQuery,
@@ -18,11 +18,11 @@ defmodule Nadia.ParserTest do
   test "parse result of get_me" do
     me =
       Parser.parse_result(
-        %{id: 666, first_name: "Nadia", last_name: nil, username: "nadia_bot"},
+        %{id: 666, first_name: "Alexia", last_name: nil, username: "alexia_bot"},
         "getMe"
       )
 
-    assert me == %User{id: 666, first_name: "Nadia", last_name: nil, username: "nadia_bot"}
+    assert me == %User{id: 666, first_name: "Alexia", last_name: nil, username: "alexia_bot"}
   end
 
   test "pase result of get_user_profile_photos" do
@@ -98,9 +98,9 @@ defmodule Nadia.ParserTest do
     updates = Parser.parse_result(raw_updates, "getUpdates")
 
     assert updates == [
-             %Nadia.Model.Update{
-               channel_post: %Nadia.Model.Message{
-                 chat: %Nadia.Model.Chat{
+             %Alexia.Model.Update{
+               channel_post: %Alexia.Model.Message{
+                 chat: %Alexia.Model.Chat{
                    id: -1_000_000_000_000,
                    title: "Test Channel",
                    type: "channel"
@@ -115,17 +115,17 @@ defmodule Nadia.ParserTest do
                },
                update_id: 790_000_000
              },
-             %Nadia.Model.Update{
-               message: %Nadia.Model.Message{
-                 chat: %Nadia.Model.Chat{
+             %Alexia.Model.Update{
+               message: %Alexia.Model.Message{
+                 chat: %Alexia.Model.Chat{
                    first_name: "John",
                    id: 440_000_000,
                    last_name: "Doe",
                    type: "private",
-                   photo: %Nadia.Model.ChatPhoto{small_file_id: "sid", big_file_id: "bid"}
+                   photo: %Alexia.Model.ChatPhoto{small_file_id: "sid", big_file_id: "bid"}
                  },
                  date: 1_508_359_228,
-                 from: %Nadia.Model.User{first_name: "John", id: 440_000_000, last_name: "Doe"},
+                 from: %Alexia.Model.User{first_name: "John", id: 440_000_000, last_name: "Doe"},
                  message_id: 3,
                  text: "Test"
                },
@@ -163,13 +163,13 @@ defmodule Nadia.ParserTest do
              %Update{
                inline_query: %InlineQuery{
                  id: 111,
-                 from: %Nadia.Model.User{
+                 from: %Alexia.Model.User{
                    id: 222,
                    first_name: "Roman",
                    last_name: "Senin",
                    username: "Rastopyr"
                  },
-                 location: %Nadia.Model.Location{
+                 location: %Alexia.Model.Location{
                    latitude: 123,
                    longitude: 321
                  },

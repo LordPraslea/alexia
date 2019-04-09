@@ -1,4 +1,4 @@
-defmodule Nadia do
+defmodule Alexia do
   @moduledoc """
   Provides access to Telegram Bot API.
 
@@ -6,11 +6,11 @@ defmodule Nadia do
   https://core.telegram.org/bots/api#available-methods
   """
 
-  alias Nadia.Model.{User, Message, Update, UserProfilePhotos, File, Error, WebhookInfo}
+  alias Alexia.Model.{User, Message, Update, UserProfilePhotos, File, Error, WebhookInfo}
 
-  import Nadia.API
+  import Alexia.API
 
-  @behaviour Nadia.Behaviour
+  @behaviour Alexia.Behaviour
 
   @doc """
   A simple method for testing your bot's auth token.
@@ -40,8 +40,8 @@ defmodule Nadia do
   * `:disable_notification` - Sends the message silently or without notification
   * `:reply_to_message_id` - If the message is a reply, ID of the original message
   * `:reply_markup` - Additional interface options. Instructions to hide keyboard or to
-  force a reply from the user - `Nadia.Model.ReplyKeyboardMarkup` or
-  `Nadia.Model.ReplyKeyboardHide` or `Nadia.Model.ForceReply`
+  force a reply from the user - `Alexia.Model.ReplyKeyboardMarkup` or
+  `Alexia.Model.ReplyKeyboardHide` or `Alexia.Model.ForceReply`
   """
   @spec send_message(binary,integer, binary, [{atom, any}]) :: {:ok, Message.t()} | {:error, Error.t()}
   def send_message(bot_token,chat_id, text, options \\ []) do
@@ -89,8 +89,8 @@ defmodule Nadia do
   * `:disable_notification` - Sends the message silently or without notification
   * `:reply_to_message_id` - If the message is a reply, ID of the original message
   * `:reply_markup` - Additional interface options. Instructions to hide keyboard or to
-  force a reply from the user - `Nadia.Model.ReplyKeyboardMarkup` or
-  `Nadia.Model.ReplyKeyboardHide` or `Nadia.Model.ForceReply`
+  force a reply from the user - `Alexia.Model.ReplyKeyboardMarkup` or
+  `Alexia.Model.ReplyKeyboardHide` or `Alexia.Model.ForceReply`
   """
   @spec send_photo(binary, integer, binary, [{atom, any}]) :: {:ok, Message.t()} | {:error, Error.t()}
   def send_photo(token,chat_id, photo, options \\ []) do
@@ -125,8 +125,8 @@ defmodule Nadia do
   * `:disable_notification` - Sends the message silently or without notification
   * `:reply_to_message_id` - If the message is a reply, ID of the original message
   * `:reply_markup` - Additional interface options. Instructions to hide keyboard or to
-  force a reply from the user - `Nadia.Model.ReplyKeyboardMarkup` or
-  `Nadia.Model.ReplyKeyboardHide` or `Nadia.Model.ForceReply`
+  force a reply from the user - `Alexia.Model.ReplyKeyboardMarkup` or
+  `Alexia.Model.ReplyKeyboardHide` or `Alexia.Model.ForceReply`
   """
   @spec send_audio(binary,integer, binary, [{atom, any}]) :: {:ok, Message.t()} | {:error, Error.t()}
   def send_audio(token,chat_id, audio, options \\ []) do
@@ -151,8 +151,8 @@ defmodule Nadia do
   * `:disable_notification` - Sends the message silently or without notification
   * `:reply_to_message_id` - If the message is a reply, ID of the original message
   * `:reply_markup` - Additional interface options. Instructions to hide keyboard or to
-  force a reply from the user - `Nadia.Model.ReplyKeyboardMarkup` or
-  `Nadia.Model.ReplyKeyboardHide` or `Nadia.Model.ForceReply`
+  force a reply from the user - `Alexia.Model.ReplyKeyboardMarkup` or
+  `Alexia.Model.ReplyKeyboardHide` or `Alexia.Model.ForceReply`
   """
   @spec send_document(binary,integer, binary, [{atom, any}]) :: {:ok, Message.t()} | {:error, Error.t()}
   def send_document(token,chat_id, document, options \\ []) do
@@ -175,8 +175,8 @@ defmodule Nadia do
   * `:disable_notification` - Sends the message silently or without notification
   * `:reply_to_message_id` - If the message is a reply, ID of the original message
   * `:reply_markup` - Additional interface options. Instructions to hide keyboard or to
-  force a reply from the user - `Nadia.Model.ReplyKeyboardMarkup` or
-  `Nadia.Model.ReplyKeyboardHide` or `Nadia.Model.ForceReply`
+  force a reply from the user - `Alexia.Model.ReplyKeyboardMarkup` or
+  `Alexia.Model.ReplyKeyboardHide` or `Alexia.Model.ForceReply`
   """
   @spec send_sticker(binary,integer, binary, [{atom, any}]) :: {:ok, Message.t()} | {:error, Error.t()}
   def send_sticker(token,chat_id, sticker, options \\ []) do
@@ -204,8 +204,8 @@ defmodule Nadia do
   * `:disable_notification` - Sends the message silently or without notification
   * `:reply_to_message_id` - If the message is a reply, ID of the original message
   * `:reply_markup` - Additional interface options. Instructions to hide keyboard or to
-  force a reply from the user - `Nadia.Model.ReplyKeyboardMarkup` or
-  `Nadia.Model.ReplyKeyboardHide` or `Nadia.Model.ForceReply`
+  force a reply from the user - `Alexia.Model.ReplyKeyboardMarkup` or
+  `Alexia.Model.ReplyKeyboardHide` or `Alexia.Model.ForceReply`
   """
   @spec send_video(binary,integer, binary, [{atom, any}]) :: {:ok, Message.t()} | {:error, Error.t()}
   def send_video(token,chat_id, video, options \\ []) do
@@ -233,8 +233,8 @@ defmodule Nadia do
   * `:disable_notification` - Sends the message silently or without notification
   * `:reply_to_message_id` - If the message is a reply, ID of the original message
   * `:reply_markup` - Additional interface options. Instructions to hide keyboard or to
-  force a reply from the user - `Nadia.Model.ReplyKeyboardMarkup` or
-  `Nadia.Model.ReplyKeyboardHide` or `Nadia.Model.ForceReply`
+  force a reply from the user - `Alexia.Model.ReplyKeyboardMarkup` or
+  `Alexia.Model.ReplyKeyboardHide` or `Alexia.Model.ForceReply`
   """
   @spec send_voice(binary, integer, binary, [{atom, any}]) :: {:ok, Message.t()} | {:error, Error.t()}
   def send_voice(token,chat_id, voice, options \\ []) do
@@ -257,8 +257,8 @@ defmodule Nadia do
   * `:disable_notification` - Sends the message silently or without notification
   * `:reply_to_message_id` - If the message is a reply, ID of the original message
   * `:reply_markup` - Additional interface options. Instructions to hide keyboard or to
-  force a reply from the user - `Nadia.Model.ReplyKeyboardMarkup` or
-  `Nadia.Model.ReplyKeyboardHide` or `Nadia.Model.ForceReply`
+  force a reply from the user - `Alexia.Model.ReplyKeyboardMarkup` or
+  `Alexia.Model.ReplyKeyboardHide` or `Alexia.Model.ForceReply`
   """
   @spec send_location(binary,integer, float, float, [{atom, any}]) ::
           {:ok, Message.t()} | {:error, Error.t()}
@@ -290,9 +290,9 @@ defmodule Nadia do
   * `:reply_to_message_id` - If the message is a reply, ID of the original message
   * `:reply_markup` - Additional interface options. A JSON-serialized object for
   an inline keyboard, custom reply keyboard, instructions to hide reply keyboard
-  or to force a reply from the user. - `Nadia.Model.InlineKeyboardMarkup` or
-  `Nadia.Model.ReplyKeyboardMarkup` or `Nadia.Model.ReplyKeyboardHide` or
-  `Nadia.Model.ForceReply`
+  or to force a reply from the user. - `Alexia.Model.InlineKeyboardMarkup` or
+  `Alexia.Model.ReplyKeyboardMarkup` or `Alexia.Model.ReplyKeyboardHide` or
+  `Alexia.Model.ForceReply`
   """
   @spec send_venue(binary,integer, float, float, binary, binary, [{atom, any}]) ::
           {:ok, Message.t()} | {:error, Error.t()}
@@ -323,9 +323,9 @@ defmodule Nadia do
   * `:reply_to_message_id` - If the message is a reply, ID of the original message
   * `:reply_markup` - Additional interface options. A JSON-serialized object for
   an inline keyboard, custom reply keyboard, instructions to hide reply keyboard
-  or to force a reply from the user. - `Nadia.Model.InlineKeyboardMarkup` or
-  `Nadia.Model.ReplyKeyboardMarkup` or `Nadia.Model.ReplyKeyboardHide` or
-  `Nadia.Model.ForceReply`
+  or to force a reply from the user. - `Alexia.Model.InlineKeyboardMarkup` or
+  `Alexia.Model.ReplyKeyboardMarkup` or `Alexia.Model.ReplyKeyboardHide` or
+  `Alexia.Model.ForceReply`
   """
   @spec send_contact(binary,integer, binary, binary, [{atom, any}]) ::
           {:ok, Message.t()} | {:error, Error.t()}
@@ -420,7 +420,7 @@ defmodule Nadia do
   def set_webhook(token,options \\ []), do: request("setWebhook", token, options)
 
   @doc """
-  Use this method to remove webhook integration if you decide to switch back to `Nadia.get_updates/1`.
+  Use this method to remove webhook integration if you decide to switch back to `Alexia.get_updates/1`.
   Returns `:ok` on success.
 
     Args:
@@ -431,7 +431,7 @@ defmodule Nadia do
 
   @doc """
   Use this method to get current webhook status.
-  On success, returns a `Nadia.Model.WebhookInfo.t()` object with webhook details.
+  On success, returns a `Alexia.Model.WebhookInfo.t()` object with webhook details.
   If the bot is using getUpdates, will return an object with the url field empty.
 
   Args:
@@ -463,10 +463,10 @@ defmodule Nadia do
   Args:
   * `token` - Unique bot token
 
-      iex> Nadia.get_file_link(%Nadia.Model.File{file_id: "BQADBQADBgADmEjsA1aqdSxtzvvVAg",
+      iex> Alexia.get_file_link(%Alexia.Model.File{file_id: "BQADBQADBgADmEjsA1aqdSxtzvvVAg",
       ...> file_path: "document/file_10", file_size: 17680})
       {:ok,
-      "https://api.telegram.org/file/bot#{Nadia.Config.token()}/document/file_10"}
+      "https://api.telegram.org/file/bot#{Alexia.Config.token()}/document/file_10"}
 
   """
   @spec get_file_link(binary,File.t()) :: {:ok, binary} | {:error, Error.t()}
@@ -625,7 +625,7 @@ defmodule Nadia do
   fixed-width text or inline URLs in your bot's message.
   * `:disable_web_page_preview` -	Disables link previews for links in this message
   * `:reply_markup`	- A JSON-serialized object for an inline
-  keyboard - `Nadia.Model.InlineKeyboardMarkup`
+  keyboard - `Alexia.Model.InlineKeyboardMarkup`
   """
   @spec edit_message_text(binary ,integer | binary, integer, binary, binary, [{atom, any}]) ::
           {:ok, Message.t()} | {:error, Error.t()}
@@ -654,7 +654,7 @@ defmodule Nadia do
   Options:
   * `:caption` - New caption of the message
   * `:reply_markup`	- A JSON-serialized object for an inline
-  keyboard - `Nadia.Model.InlineKeyboardMarkup`
+  keyboard - `Alexia.Model.InlineKeyboardMarkup`
   """
   @spec edit_message_caption(binary,integer | binary, integer, binary, [{atom, any}]) ::
           {:ok, Message.t()} | {:error, Error.t()}
@@ -681,7 +681,7 @@ defmodule Nadia do
 
   Options:
   * `:reply_markup`	- A JSON-serialized object for an inline
-  keyboard - `Nadia.Model.InlineKeyboardMarkup`
+  keyboard - `Alexia.Model.InlineKeyboardMarkup`
   """
   @spec edit_message_reply_markup(binary,integer | binary, integer, binary, [{atom, any}]) ::
           {:ok, Message.t()} | {:error, Error.t()}
@@ -717,7 +717,7 @@ defmodule Nadia do
   * `switch_pm_parameter` - Parameter for the start message sent to the bot when user
   presses the switch button.
   """
-  @spec answer_inline_query(binary,binary, [Nadia.Model.InlineQueryResult.t()], [{atom, any}]) ::
+  @spec answer_inline_query(binary,binary, [Alexia.Model.InlineQueryResult.t()], [{atom, any}]) ::
           :ok | {:error, Error.t()}
   def answer_inline_query(token, inline_query_id, results, options \\ []) do
     encoded_results =
@@ -741,14 +741,14 @@ defmodule Nadia do
   * `token` - Unique bot token
   * `chat_id` - Unique identifier for the target chat or username of the target channel
   (in the format @channelusername)
-  * `media` -  	Array of `Nadia.Model.InputMediaPhoto`  and `Nadia.Model.InputMediaVideo`
+  * `media` -  	Array of `Alexia.Model.InputMediaPhoto`  and `Alexia.Model.InputMediaVideo`
   * `options` - orddict of options
 
   Options:
   * `:disable_notification` - Sends the message silently or without notification
   * `:reply_to_message_id` - If the message is a reply, ID of the original message
   """
-  @spec send_media_group(binary, integer, [Nadia.Model.InputMediaPhoto.t()], [{atom, any}]) :: {:ok, Message.t()} | {:error, Error.t()}
+  @spec send_media_group(binary, integer, [Alexia.Model.InputMediaPhoto.t()], [{atom, any}]) :: {:ok, Message.t()} | {:error, Error.t()}
   def send_media_group(token,chat_id, media, options \\ []) do
     request("sendMediaGroup", token, [chat_id: chat_id, media: media] ++ options, :media)
   end

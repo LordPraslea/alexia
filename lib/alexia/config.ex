@@ -1,4 +1,4 @@
-defmodule Nadia.Config do
+defmodule Alexia.Config do
   @default_timeout 5
   @default_base_url "https://api.telegram.org/bot"
   @default_graph_base_url "https://api.telegra.ph"
@@ -15,7 +15,7 @@ defmodule Nadia.Config do
   def file_base_url, do: config_or_env(:file_base_url) || @default_file_base_url
 
   defp config_or_env(key) do
-    case Application.fetch_env(:nadia, key) do
+    case Application.fetch_env(:alexia, key) do
       {:ok, {:system, var}} ->
         System.get_env(var)
 

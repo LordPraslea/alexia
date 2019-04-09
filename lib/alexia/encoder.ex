@@ -1,4 +1,4 @@
-defimpl Poison.Encoder, for: Nadia.Model.InlineKeyboardButton do
+defimpl Poison.Encoder, for: Alexia.Model.InlineKeyboardButton do
   def encode(button, options) do
     Map.from_struct(button)
     |> reject_nil

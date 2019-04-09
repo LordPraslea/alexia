@@ -1,9 +1,9 @@
-defmodule Nadia.Parser do
+defmodule Alexia.Parser do
   @moduledoc """
   Provides parser logics for API results.
   """
 
-  alias Nadia.Model.{
+  alias Alexia.Model.{
     User,
     Chat,
     ChatMember,
@@ -18,8 +18,8 @@ defmodule Nadia.Parser do
     WebhookInfo
   }
 
-  alias Nadia.Model.{Video, Voice, Contact, Location, Venue, Update, File, CallbackQuery}
-  alias Nadia.Model.UserProfilePhotos
+  alias Alexia.Model.{Video, Voice, Contact, Location, Venue, Update, File, CallbackQuery}
+  alias Alexia.Model.UserProfilePhotos
 
   @doc """
   parse `result` field of decoded API response json.

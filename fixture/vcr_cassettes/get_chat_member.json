@@ -11,7 +11,7 @@
       "url": "https://api.telegram.org/bot<TOKEN>/getChatMember"
     },
     "response": {
-      "body": "{\"ok\":true,\"result\":{\"user\":{\"id\":666,\"first_name\":\"Nadia\",\"username\":\"nadia_bot\"},\"status\":\"member\"}}",
+      "body": "{\"ok\":true,\"result\":{\"user\":{\"id\":666,\"first_name\":\"Alexia\",\"username\":\"alexia_bot\"},\"status\":\"member\"}}",
       "headers": {
         "Server": "nginx/1.10.0",
         "Date": "Tue, 24 May 2016 08:43:29 GMT",

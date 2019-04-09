@@ -1,4 +1,4 @@
-defmodule Nadia.Supervisor.Matcher do
+defmodule Alexia.Supervisor.Matcher do
   @moduledoc  """
     Bot Matcher Supervisor
   """

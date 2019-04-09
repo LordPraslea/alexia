@@ -1,9 +1,9 @@
-defmodule Nadia.Graph.Parser do
+defmodule Alexia.Graph.Parser do
   @moduledoc """
   Provides parser logics for API results.
   """
 
-  alias Nadia.Graph.Model.{Account, PageList, Page, PageViews}
+  alias Alexia.Graph.Model.{Account, PageList, Page, PageViews}
 
   @doc """
   parse `result` field of decoded API response json.

@@ -1,4 +1,4 @@
-defmodule Nadia.Supervisor.BotSupervisor do
+defmodule Alexia.Supervisor.BotSupervisor do
   @moduledoc  """
     Bot Supervisor
   """
@@ -12,8 +12,8 @@ defmodule Nadia.Supervisor.BotSupervisor do
     children = [
         {Registry, [keys: :unique, name: Registry.BotPoller]},
         {Registry, [keys: :unique, name: Registry.BotMatcher]},
-        Supervisor.child_spec({Nadia.Supervisor.Matcher, []}, type: :supervisor),
-        Supervisor.child_spec({Nadia.Supervisor.Poller, bots}, type: :supervisor),
+        Supervisor.child_spec({Alexia.Supervisor.Matcher, []}, type: :supervisor),
+        Supervisor.child_spec({Alexia.Supervisor.Poller, bots}, type: :supervisor),
 
     ]
 

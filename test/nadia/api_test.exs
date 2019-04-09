@@ -1,21 +1,21 @@
-defmodule Nadia.APITest do
+defmodule Alexia.APITest do
   use ExUnit.Case
   use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
-  doctest Nadia.API
-  alias Nadia.API
+  doctest Alexia.API
+  alias Alexia.API
 
   setup_all do
-    unless Application.get_env(:nadia, :token) do
-      Application.put_env(:nadia, :token, "304884665:AAE1ItId1gf9MsM-Smrv9sPc0glmB2HkMAo")
-      Application.put_env(:nadia, :bots, [
-        %{bot_name: "Nadia", commands_module: YourAppModule.NadiaBot.Commands,
+    unless Application.get_env(:alexia, :token) do
+      Application.put_env(:alexia, :token, "304884665:AAE1ItId1gf9MsM-Smrv9sPc0glmB2HkMAo")
+      Application.put_env(:alexia, :bots, [
+        %{bot_name: "Alexia", commands_module: YourAppModule.AlexiaBot.Commands,
         token:  "304884665:AAE1ItId1gf9MsM-Smrv9sPc0glmB2HkMAo"}])
     end
 
     :ok
   end
   def get_token() do
-      Application.get_env(:nadia, :token)
+      Application.get_env(:alexia, :token)
   end
   setup do
     ExVCR.Config.filter_sensitive_data("bot[^/]+/", "bot<TOKEN>/")
@@ -30,6 +30,6 @@ defmodule Nadia.APITest do
 
   test "build_file_url" do
     assert API.build_file_url(get_token(), "document/file_10") ==
-             "https://api.telegram.org/file/bot#{Nadia.Config.token()}/document/file_10"
+             "https://api.telegram.org/file/bot#{Alexia.Config.token()}/document/file_10"
   end
 end

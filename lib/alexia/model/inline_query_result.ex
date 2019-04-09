@@ -1,24 +1,24 @@
-defmodule Nadia.Model.InlineQueryResult do
+defmodule Alexia.Model.InlineQueryResult do
   @type t ::
-          Nadia.Model.InlineQueryResult.Article.t()
-          | Nadia.Model.InlineQueryResult.Photo.t()
-          | Nadia.Model.InlineQueryResult.Gif.t()
-          | Nadia.Model.InlineQueryResult.Mpeg4Gif.t()
-          | Nadia.Model.InlineQueryResult.Video.t()
-          | Nadia.Model.InlineQueryResult.Audio.t()
-          | Nadia.Model.InlineQueryResult.Voice.t()
-          | Nadia.Model.InlineQueryResult.Document.t()
-          | Nadia.Model.InlineQueryResult.Location.t()
-          | Nadia.Model.InlineQueryResult.Venue.t()
-          | Nadia.Model.InlineQueryResult.Contact.t()
-          | Nadia.Model.InlineQueryResult.CachedPhoto
-          | Nadia.Model.InlineQueryResult.CachedGif
-          | Nadia.Model.InlineQueryResult.CachedMpeg4Gif
-          | Nadia.Model.InlineQueryResult.CachedSticker
-          | Nadia.Model.InlineQueryResult.CachedDocument
-          | Nadia.Model.InlineQueryResult.CachedVideo
-          | Nadia.Model.InlineQueryResult.CachedVoice
-          | Nadia.Model.InlineQueryResult.CachedAudio
+          Alexia.Model.InlineQueryResult.Article.t()
+          | Alexia.Model.InlineQueryResult.Photo.t()
+          | Alexia.Model.InlineQueryResult.Gif.t()
+          | Alexia.Model.InlineQueryResult.Mpeg4Gif.t()
+          | Alexia.Model.InlineQueryResult.Video.t()
+          | Alexia.Model.InlineQueryResult.Audio.t()
+          | Alexia.Model.InlineQueryResult.Voice.t()
+          | Alexia.Model.InlineQueryResult.Document.t()
+          | Alexia.Model.InlineQueryResult.Location.t()
+          | Alexia.Model.InlineQueryResult.Venue.t()
+          | Alexia.Model.InlineQueryResult.Contact.t()
+          | Alexia.Model.InlineQueryResult.CachedPhoto
+          | Alexia.Model.InlineQueryResult.CachedGif
+          | Alexia.Model.InlineQueryResult.CachedMpeg4Gif
+          | Alexia.Model.InlineQueryResult.CachedSticker
+          | Alexia.Model.InlineQueryResult.CachedDocument
+          | Alexia.Model.InlineQueryResult.CachedVideo
+          | Alexia.Model.InlineQueryResult.CachedVoice
+          | Alexia.Model.InlineQueryResult.CachedAudio
 
   defmodule Article do
     defstruct type: "article",
