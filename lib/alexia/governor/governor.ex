@@ -1,5 +1,5 @@
 defmodule Alexia.Governor do
-
+  require Logger
   def get_chat_id(update) do
     case update do
        %{inline_query: inline_query} when not is_nil(inline_query) ->
@@ -21,12 +21,14 @@ defmodule Alexia.Governor do
     Hashes the bot token against an unique random string
     Adds the BOT info to an ets table for later recall
   """
-    def add_bot_info(bot) do
+    def get_bot_hash(bot) do
       secret_mix = Application.get_env(:alexia,:secret_mix)
-      current_bot_hash = :crypto.hash(:sha256,bot.token <> secret_mix)
+      :crypto.hash(:sha256,bot.token <> secret_mix)
       |> Base.url_encode64(padding: false)
-  #    :ets.insert(:alexia_bot_info,{current_bot_hash,Map.put(bot,:matcher, matcher_pid)})
-      current_bot_hash
+    end
+
+    def add_bot_info(bot) do
+
     end
 
     #TODO it sems that I only need the matcher pid
@@ -37,6 +39,17 @@ defmodule Alexia.Governor do
          [{_ign, bot}] ->  bot
           [] ->  nil
        end
+    end
+
+    def setup_bot_webhook(bot) do
+      webhook = Map.get(bot,:webhook)
+      current_bot_hash = Alexia.Governor.get_bot_hash(bot)
+      if !is_nil(webhook) do
+        #    Alexia.Governor.Matcher.start_matcher(bot)
+        Alexia.set_webhook(bot.token,url: webhook <> current_bot_hash )
+        Logger.info "Starting webhook #{webhook <> current_bot_hash }"
+      end
+      current_bot_hash
     end
 
 end
