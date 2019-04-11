@@ -18,8 +18,7 @@ defmodule Alexia.Governor.Poller do
   end
 
   def init(%{name: name} = settings) do
-    {:ok, matcher_pid} = Supervisor.start_child(Alexia.Supervisor.Matcher,
-      Supervisor.child_spec({Alexia.Governor.Matcher, settings}, id: settings.bot_name ))
+    {:ok, matcher_pid} = Alexia.Governor.Matcher.start_matcher(settings)
       update(name)
     {:ok, Map.put(settings,:matcher, matcher_pid)}
   end

@@ -9,11 +9,11 @@ defmodule Alexia.Supervisor.Poller do
   end
 
   def init(bots) do
-    children  =   Enum.map(bots,fn (bot) ->
+    children  = Enum.map(bots,fn (bot) ->
       #:crypto.strong_rand_bytes(5) |> Base.encode32
-      Supervisor.child_spec({Alexia.Governor.Poller, bot}, id: bot.bot_name )
+      #Verify
+        Supervisor.child_spec({Alexia.Governor.Poller, bot}, id: bot.bot_name )
     end)
-
     Supervisor.init(children, strategy: :one_for_one)
   end
 

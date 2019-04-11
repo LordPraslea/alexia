@@ -33,6 +33,7 @@ defmodule Alexia.Parser do
       "sendChatAction" -> result
       "getUserProfilePhotos" -> parse(UserProfilePhotos, result)
       "getUpdates" -> parse(:updates, result)
+      "getUpdate" -> parse(Update, result)
       "setWebhook" -> result
       "deleteWebhook" -> result
       "getWebhookInfo" -> parse(WebhookInfo, result)

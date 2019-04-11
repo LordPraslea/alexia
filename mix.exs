@@ -6,7 +6,7 @@ defmodule Alexia.Mixfile do
       app: :alexia,
       version: "0.5.0",
       elixir: "~> 1.6",
-      description: "Telegram Bot API Wrapper written in Elixir",
+      description: "Telegram Bot API Wrapper with support for multiple bots",
       package: package(),
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
@@ -44,7 +44,7 @@ defmodule Alexia.Mixfile do
 
   defp package do
     [
-      maintainers: ["zhyu"],
+      maintainers: ["enotsoul"],
       licenses: ["MIT"],
       links: %{"Fossil" => "https://lba.im"}
     ]

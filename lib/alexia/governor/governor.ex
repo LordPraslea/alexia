@@ -16,4 +16,27 @@ defmodule Alexia.Governor do
      end
     end
 
+
+  @doc  """
+    Hashes the bot token against an unique random string
+    Adds the BOT info to an ets table for later recall
+  """
+    def add_bot_info(bot) do
+      secret_mix = Application.get_env(:alexia,:secret_mix)
+      current_bot_hash = :crypto.hash(:sha256,bot.token <> secret_mix)
+      |> Base.url_encode64(padding: false)
+  #    :ets.insert(:alexia_bot_info,{current_bot_hash,Map.put(bot,:matcher, matcher_pid)})
+      current_bot_hash
+    end
+
+    #TODO it sems that I only need the matcher pid
+    #since the bot token should already be in there!
+    def get_bot_info(bot_hash) do
+       case :ets.lookup(:alexia_bot_info, bot_hash)   do
+         [{_ign, bot,matcher}] ->  {bot,matcher}
+         [{_ign, bot}] ->  bot
+          [] ->  nil
+       end
+    end
+
 end
