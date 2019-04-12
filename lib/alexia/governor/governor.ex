@@ -1,5 +1,11 @@
 defmodule Alexia.Governor do
   require Logger
+
+  @doc  """
+    Given an update (either from getUpdates or webhook) it extracts the chat_id
+
+    It can be from an inline_query, callback_query, message, edited message or channel post.
+  """
   def get_chat_id(update) do
     case update do
        %{inline_query: inline_query} when not is_nil(inline_query) ->
@@ -18,8 +24,7 @@ defmodule Alexia.Governor do
 
 
   @doc  """
-    Hashes the bot token against an unique random string
-    Adds the BOT info to an ets table for later recall
+    Hashes the bot token against an unique random string called `:secret_mix`
   """
     def get_bot_hash(bot) do
       secret_mix = Application.get_env(:alexia,:secret_mix)
@@ -27,20 +32,30 @@ defmodule Alexia.Governor do
       |> Base.url_encode64(padding: false)
     end
 
-    def add_bot_info(bot) do
 
-    end
+    @doc  """
+      Given the `bot_hash` it returns the bot_matcher_pid or nil if it doesn't exist.
 
-    #TODO it sems that I only need the matcher pid
-    #since the bot token should already be in there!
+      Args:
+      * `bot_hash` - Hashed bot token
+      Returns the bot bot_matcher_pid
+    """
     def get_bot_info(bot_hash) do
        case :ets.lookup(:alexia_bot_info, bot_hash)   do
-         [{_ign, bot,matcher}] ->  {bot,matcher}
-         [{_ign, bot}] ->  bot
+         [{_ign, bot,matcher_pid}] ->  {bot,matcher_pid}
+         [{_ign, bot_matcher_pid}] ->  bot_matcher_pid
           [] ->  nil
        end
     end
 
+    @doc  """
+      Given the `bot` map it takes the token and hashes it. If the webhook is set up then it
+      sets the correct webhook URL with the hashed token.
+
+      Args:
+      * `bot` - Bot map containing bot_name, token and other settings.
+      Returns the bot bot_matcher_pid
+    """
     def setup_bot_webhook(bot) do
       webhook = Map.get(bot,:webhook)
       current_bot_hash = Alexia.Governor.get_bot_hash(bot)

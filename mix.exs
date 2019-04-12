@@ -4,9 +4,9 @@ defmodule Alexia.Mixfile do
   def project do
     [
       app: :alexia,
-      version: "0.5.1",
+      version: "0.5.3",
       elixir: "~> 1.6",
-      description: "Telegram Bot API Wrapper with support for multiple bots",
+      description: description(),
       package: package(),
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
@@ -41,7 +41,12 @@ defmodule Alexia.Mixfile do
       {:inch_ex, "~> 2.0.0", only: :docs}
     ]
   end
-
+  defp description() do
+    "Telegram Bot API Wrapper based on Nadia with support for multiple bots in the same application.
+      Included supervision trees for each bot.
+     Each bot can have it's own Poller or webhook handler.
+     Bots have Matcher processes which dispatch the commands in their own tasks."
+  end
   defp package do
     [
       maintainers: ["enotsoul"],

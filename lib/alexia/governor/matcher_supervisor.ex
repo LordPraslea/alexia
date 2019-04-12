@@ -1,6 +1,6 @@
 defmodule Alexia.Supervisor.Matcher do
   @moduledoc  """
-    Bot Matcher Supervisor
+    Bot Matcher Supervisor. 
   """
   use Supervisor
 

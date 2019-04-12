@@ -1,14 +1,17 @@
 defmodule Alexia.Governor.Matcher do
-  @moduledoc """
+  @moduledoc  """
       Each Bot has a Matcher GenServer which runs independent
-      spawned_links for the functions and modules to run the commands
+      Tasks for the functions and modules to run the commands.
+
   """
   use GenServer
 #  alias MafiaBot.Commands
   require Logger
 
   # Server
-
+  @doc  """
+    Each bot has a matcher.
+  """
   def start_link(bot) do
     bot_name = Map.get(bot,:bot_name)
     name =  {:via, Registry, {Registry.BotMatcher, bot_name}}
@@ -49,7 +52,7 @@ defmodule Alexia.Governor.Matcher do
 
   @doc  """
     Dynamically starting a matcher for a bot under the Matcher Supervisor
-    Use from within your application to add a dynamic bot
+    Use from within your application to add a dynamic bots to match
   """
   def start_matcher(bot) do
     Supervisor.start_child(Alexia.Supervisor.Matcher,

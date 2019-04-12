@@ -3,15 +3,18 @@ Alexia [![Build Status](https://travis-ci.org/zhyu/alexia.svg?branch=master)](ht
 
 Telegram Bot API Wrapper written in Elixir ([document](https://hexdocs.pm/alexia/))
 
-*NOTE* Version 0.5.0 implements multi bots and comes with
-It's not backward compatible with the previous version unless you remap the functions yourself.
+This is a fork of nadia adding extra features, enhancements etc.
+*NOTE* Version 0.5.0 implements multi bots and comes with a total makeover.
+It's not backward compatible with the previous versions of nadia (0.4.4) unless you remap the functions yourself.
+
+[A detailed HOW TO tutorial is available on my blog](https://andreiclinciu.net/TODO-ADD_LINK)
 
 ## Installation
 Add Alexia to your `mix.exs` dependencies:
 
 ```elixir
 def deps do
-  [{:alexia, "~> 0.5.0"}]
+  [{:alexia, "~> 0.5.3"}]
 end
 ```
 and run `$ mix deps.get`.
@@ -23,9 +26,11 @@ In `config/config.exs`, add your Telegram Bot settings like [this](config/config
 ```elixir
 config :alexia, bots: [
   %{bot_name: "AlexandraBot", commands_module: YourAppModule.AlexandraBot.Commands,
-  token:  Base.decode64!("KFEDOSKYG5KUQSZVK5CDKU22INEUUWCZGRLDIRKPJ5BEUQZWK5IA")},
+  token:  Base.decode64!("KFEDOSKYG5KUQSZVK5CDKU22INEUUWCZGRLDIRKPJ5BEUQZWK5IA"),
+    webhook: "https://yourdomain.example.com/your-telegram-update-link/"},
   %{bot_name: "MegaCoolBot", commands_module: YourAppModule.MegaCoolBot.Commands,
-  token: Base.decode64!("KZDU2VBUJZJUQQJSIFLVMT2SGZCVMWKYKFKUOQ2OKNHU4QSXIU2Q")}]
+  token: Base.decode64!("KZDU2VBUJZJUQQJSIFLVMT2SGZCVMWKYKFKUOQ2OKNHU4QSXIU2Q")}],
+  secret_mix: "MOq8cDjlwEBoLi88TXfGY+HeQllySLgEuObNUr006Ug"
 
 ```
 

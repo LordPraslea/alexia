@@ -47,7 +47,7 @@ defmodule YourBot.Commands do
   end
   #Run code in yet another module based on a command
   #Code Not provided, but you get the idea
-  def text_command("/start",update,token), do: MafiaBot.Commands.StartGame.start(update,token)
+#  def text_command("/start",update,token), do: MafiaBot.Commands.StartGame.start(update,token)
   #A different module yet again.. to keep your code "cleaner"
   def text_command("/hash" <> _ = text,update,token),
     do: UtilitiesBot.Commands.Conversion.hash(text,update,token)

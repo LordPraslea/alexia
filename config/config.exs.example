@@ -5,9 +5,11 @@ use Mix.Config
 
 config :alexia, bots: [
   %{bot_name: "AlexandraBot", commands_module: YourAppModule.AlexandraBot.Commands,
-  token:  Base.decode64!("KFEDOSKYG5KUQSZVK5CDKU22INEUUWCZGRLDIRKPJ5BEUQZWK5IA")},
+  token:  Base.decode64!("KFEDOSKYG5KUQSZVK5CDKU22INEUUWCZGRLDIRKPJ5BEUQZWK5IA"),
+    webhook: "https://yourdomain.example.com/your-telegram-update-link/"},
   %{bot_name: "MegaCoolBot", commands_module: YourAppModule.MegaCoolBot.Commands,
-  token: Base.decode64!("KZDU2VBUJZJUQQJSIFLVMT2SGZCVMWKYKFKUOQ2OKNHU4QSXIU2Q")}]
+  token: Base.decode64!("KZDU2VBUJZJUQQJSIFLVMT2SGZCVMWKYKFKUOQ2OKNHU4QSXIU2Q")}],
+  secret_mix: "MOq8cDjlwEBoLi88TXfGY+HeQllySLgEuObNUr006Ug"
 
 config :alexia,
   proxy: "http://proxy.example.org:443/",

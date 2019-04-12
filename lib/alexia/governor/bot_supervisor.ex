@@ -1,6 +1,10 @@
 defmodule Alexia.Supervisor.BotSupervisor do
   @moduledoc  """
-    Bot Supervisor
+    Bot Supervisor Boss Module.
+
+    This SuperVisor initiates an ets table called :alexia_bot_info.
+    It then splits the bots in poller and webhook bots which will be started under their own processes and supervisor trees.
+
   """
   use Supervisor
 
