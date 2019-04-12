@@ -7,7 +7,7 @@ This is a fork of nadia adding extra features, enhancements etc.
 *NOTE* Version 0.5.0 implements multi bots and comes with a total makeover.
 It's not backward compatible with the previous versions of nadia (0.4.4) unless you remap the functions yourself.
 
-[A detailed HOW TO tutorial is available on my blog](https://andreiclinciu.net/TODO-ADD_LINK)
+[A detailed HOW TO tutorial is available on my blog](https://andreiclinciu.net/alexia-telegram-bot-library-for-elixir-multi-bot-environments-and-supervisor)
 
 ## Installation
 Add Alexia to your `mix.exs` dependencies:
