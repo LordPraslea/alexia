@@ -7,8 +7,10 @@ defmodule Alexia.Model do
   """
 
   defmodule User do
-    defstruct id: nil, first_name: nil, last_name: nil, username: nil
-    @type t :: %User{id: integer, first_name: binary, last_name: binary, username: binary}
+    defstruct id: nil, first_name: nil, last_name: nil, username: nil,
+      is_bot: nil, language_code: nil
+    @type t :: %User{id: integer, first_name: binary, last_name: binary,
+     username: binary, is_bot: boolean, language_code: binary}
   end
 
   defmodule ChatPhoto do
@@ -310,14 +312,15 @@ defmodule Alexia.Model do
   end
 
   defmodule CallbackQuery do
-    defstruct id: nil, from: nil, message: nil, inline_message_id: nil, data: nil
+    defstruct id: nil, from: nil, message: nil, inline_message_id: nil, data: nil, chat_instance: nil
 
     @type t :: %CallbackQuery{
             id: binary,
             from: User.t(),
             message: Message.t(),
             inline_message_id: binary,
-            data: binary
+            data: binary,
+            chat_instance: binary
           }
   end
 

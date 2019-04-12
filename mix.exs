@@ -4,7 +4,7 @@ defmodule Alexia.Mixfile do
   def project do
     [
       app: :alexia,
-      version: "0.5.0",
+      version: "0.5.1",
       elixir: "~> 1.6",
       description: "Telegram Bot API Wrapper with support for multiple bots",
       package: package(),
