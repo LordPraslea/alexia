@@ -51,7 +51,10 @@ defmodule Alexia.Mixfile do
     [
       maintainers: ["enotsoul"],
       licenses: ["MIT"],
-      links: %{"Fossil" => "https://lba.im"}
+      links: %{
+        "Fossil" => "https://lba.im/fossilr3po/alexia-telegram",
+        "How to use" => "https://andreiclinciu.net/alexia-telegram-bot-library-for-elixir-multi-bot-environments-and-supervisor"
+      }
     ]
   end
 end
