@@ -4,7 +4,7 @@ defmodule Alexia.Mixfile do
   def project do
     [
       app: :alexia,
-      version: "0.5.3",
+      version: "0.5.4",
       elixir: "~> 1.6",
       description: description(),
       package: package(),
@@ -37,15 +37,13 @@ defmodule Alexia.Mixfile do
       {:exvcr, "~> 0.10.1", only: [:dev, :test]},
       {:bypass, "~> 1.0", only: [:test, :dev]},
       {:earmark, "~> 1.3.2", only: :docs},
-      {:ex_doc, "~> 0.18.3", only: :docs},
+      {:ex_doc, "~> 0.20.1", only: :docs},
       {:inch_ex, "~> 2.0.0", only: :docs}
     ]
   end
   defp description() do
     "Telegram Bot API Wrapper based on Nadia with support for multiple bots in the same application.
-      Included supervision trees for each bot.
-     Each bot can have it's own Poller or webhook handler.
-     Bots have Matcher processes which dispatch the commands in their own tasks."
+      Each bot is started under it's own supervision tree for a poller or webhook. Matchers dispatch each bot's unique module and commands in a concurrent way. "
   end
   defp package do
     [

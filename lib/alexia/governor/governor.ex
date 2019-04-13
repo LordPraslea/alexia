@@ -1,5 +1,9 @@
 defmodule Alexia.Governor do
+  @moduledoc  """
+    The Governor module provides certain utilities to be used by bots.
+  """
   require Logger
+
 
   @doc  """
     Given an update (either from getUpdates or webhook) it extracts the chat_id
@@ -25,10 +29,11 @@ defmodule Alexia.Governor do
 
   @doc  """
     Hashes the bot token against an unique random string called `:secret_mix`
+    Used internally to route
   """
-    def get_bot_hash(bot) do
+    def token_to_hash(token) do
       secret_mix = Application.get_env(:alexia,:secret_mix)
-      :crypto.hash(:sha256,bot.token <> secret_mix)
+      :crypto.hash(:sha256,token <> secret_mix)
       |> Base.url_encode64(padding: false)
     end
 
@@ -58,11 +63,13 @@ defmodule Alexia.Governor do
     """
     def setup_bot_webhook(bot) do
       webhook = Map.get(bot,:webhook)
-      current_bot_hash = Alexia.Governor.get_bot_hash(bot)
+      current_bot_hash = Alexia.Governor.token_to_hash(bot.token)
       if !is_nil(webhook) do
         #    Alexia.Governor.Matcher.start_matcher(bot)
         Alexia.set_webhook(bot.token,url: webhook <> current_bot_hash )
         Logger.info "Starting webhook #{webhook <> current_bot_hash }"
+      else
+        Alexia.set_webhook(bot.token, url: "")
       end
       current_bot_hash
     end
