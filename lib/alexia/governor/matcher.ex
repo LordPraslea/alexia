@@ -22,7 +22,7 @@ defmodule Alexia.Governor.Matcher do
   end
 
   def init(bot) do
-    :ets.insert(:alexia_bot_info,{bot.current_bot_hash,self()})
+    :ets.insert(:alexia_bot_info,{{bot.current_bot_hash, :matcher},self()})
     {:ok, bot}
   end
 

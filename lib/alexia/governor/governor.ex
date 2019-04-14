@@ -29,7 +29,7 @@ defmodule Alexia.Governor do
 
   @doc  """
     Hashes the bot token against an unique random string called `:secret_mix`
-    Used internally to route
+    Used internally to route bot information
   """
     def token_to_hash(token) do
       secret_mix = Application.get_env(:alexia,:secret_mix)
@@ -39,16 +39,22 @@ defmodule Alexia.Governor do
 
 
     @doc  """
+      Add specific bot information to the ETS table
+    """
+    def add_bot_info(bot_hash, type, data) do
+        :ets.insert(:alexia_bot_info,{{bot_hash,type},data})
+    end
+    @doc  """
       Given the `bot_hash` it returns the bot_matcher_pid or nil if it doesn't exist.
 
       Args:
       * `bot_hash` - Hashed bot token
-      Returns the bot bot_matcher_pid
+      * `type` - Type of info, defaults to :matcher
+      Returns the bot Alexia.Governor.Matcher pid
     """
-    def get_bot_info(bot_hash) do
-       case :ets.lookup(:alexia_bot_info, bot_hash)   do
-         [{_ign, bot,matcher_pid}] ->  {bot,matcher_pid}
-         [{_ign, bot_matcher_pid}] ->  bot_matcher_pid
+    def get_bot_info(bot_hash, type \\ :matcher) do
+       case :ets.lookup(:alexia_bot_info, {bot_hash, type})   do
+         [{_ign, bot_info}] ->  bot_info
           [] ->  nil
        end
     end
