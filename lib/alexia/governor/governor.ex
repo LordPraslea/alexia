@@ -41,19 +41,19 @@ defmodule Alexia.Governor do
     @doc  """
       Add specific bot information to the ETS table
     """
-    def add_bot_info(bot_hash, type, data) do
-        :ets.insert(:alexia_bot_info,{{bot_hash,type},data})
+    def add_bot_info(bot_token, type, data) do
+        :ets.insert(:alexia_bot_info,{{token_to_hash(bot_token),type},data})
     end
     @doc  """
-      Given the `bot_hash` it returns the bot_matcher_pid or nil if it doesn't exist.
+      Given the `bot_token` it hashes it and returns the bot_matcher_pid or nil if it doesn't exist.
 
       Args:
-      * `bot_hash` - Hashed bot token
+      * `bot_token` - Hashed bot token
       * `type` - Type of info, defaults to :matcher
-      Returns the bot Alexia.Governor.Matcher pid
+      Returns the bot Alexia.Governor.Matcher pid OR the specified type stored previously
     """
-    def get_bot_info(bot_hash, type \\ :matcher) do
-       case :ets.lookup(:alexia_bot_info, {bot_hash, type})   do
+    def get_bot_info(bot_token, type \\ :matcher) do
+       case :ets.lookup(:alexia_bot_info, {token_to_hash(bot_token), type})   do
          [{_ign, bot_info}] ->  bot_info
           [] ->  nil
        end
