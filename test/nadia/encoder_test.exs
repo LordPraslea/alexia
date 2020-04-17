@@ -4,7 +4,7 @@ defmodule Alexia.EncoderTest do
   alias Alexia.Model.{InlineKeyboardButton}
 
   test "inline keyboard button excludes unknown keys as json" do
-    json = Poison.encode!(%InlineKeyboardButton{})
+    json = Jason.encode!(%InlineKeyboardButton{})
 
     assert json == "{}"
   end

@@ -16,7 +16,7 @@ config :alexia,
   # can also be
   # proxy: {"proxy.example.org", 443}
   # or use an environment variable
-  # proxy: {:system, "https_proxy"}
+  # proxy: {:socks5, 'proxy.example.org', 443}
   recv_timeout: 10
 
   # If the need ever rises, you can configure the base url for the api

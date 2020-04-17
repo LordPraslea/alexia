@@ -1,4 +1,4 @@
-Alexia [![Build Status](https://travis-ci.org/zhyu/alexia.svg?branch=master)](https://travis-ci.org/zhyu/alexia) [![Inline docs](http://inch-ci.org/github/zhyu/alexia.svg)](http://inch-ci.org/github/zhyu/alexia) [![Hex pm](https://img.shields.io/hexpm/v/alexia.svg)](https://hex.pm/packages/alexia) [![Hex.pm](https://img.shields.io/hexpm/dt/alexia.svg)](https://hex.pm/packages/alexia)
+Alexia [![Hex pm](https://img.shields.io/hexpm/v/alexia.svg)](https://hex.pm/packages/alexia) [![Hex.pm](https://img.shields.io/hexpm/dt/alexia.svg)](https://hex.pm/packages/alexia)
 =====
 
 Telegram Bot API Wrapper written in Elixir ([document](https://hexdocs.pm/alexia/))
@@ -14,7 +14,7 @@ Add Alexia to your `mix.exs` dependencies:
 
 ```elixir
 def deps do
-  [{:alexia, "~> 0.5.3"}]
+  [{:alexia, "~> 0.6.0"}]
 end
 ```
 and run `$ mix deps.get`.
@@ -43,7 +43,7 @@ config :alexia,
 You can also add a proxy support.
 ```elixir
 config :alexia,
-  proxy: "http://proxy_url:proxy_port",
+  proxy: "http://proxy_url:proxy_port", # or {:socks5, 'proxy_host', proxy_port}
   proxy_auth: {"user", "password"},
   ssl: [versions: [:'tlsv1.2']]
 ```

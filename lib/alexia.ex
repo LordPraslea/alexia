@@ -41,7 +41,7 @@ defmodule Alexia do
   * `:reply_to_message_id` - If the message is a reply, ID of the original message
   * `:reply_markup` - Additional interface options. Instructions to hide keyboard or to
   force a reply from the user - `Alexia.Model.ReplyKeyboardMarkup` or
-  `Alexia.Model.ReplyKeyboardHide` or `Alexia.Model.ForceReply`
+  `Alexia.Model.ReplyKeyboardRemove` or `Alexia.Model.ForceReply`
   """
   @spec send_message(binary,integer, binary, [{atom, any}]) :: {:ok, Message.t()} | {:error, Error.t()}
   def send_message(bot_token,chat_id, text, options \\ []) do
@@ -90,7 +90,7 @@ defmodule Alexia do
   * `:reply_to_message_id` - If the message is a reply, ID of the original message
   * `:reply_markup` - Additional interface options. Instructions to hide keyboard or to
   force a reply from the user - `Alexia.Model.ReplyKeyboardMarkup` or
-  `Alexia.Model.ReplyKeyboardHide` or `Alexia.Model.ForceReply`
+  `Alexia.Model.ReplyKeyboardRemove` or `Alexia.Model.ForceReply`
   """
   @spec send_photo(binary, integer, binary, [{atom, any}]) :: {:ok, Message.t()} | {:error, Error.t()}
   def send_photo(token,chat_id, photo, options \\ []) do
@@ -126,7 +126,7 @@ defmodule Alexia do
   * `:reply_to_message_id` - If the message is a reply, ID of the original message
   * `:reply_markup` - Additional interface options. Instructions to hide keyboard or to
   force a reply from the user - `Alexia.Model.ReplyKeyboardMarkup` or
-  `Alexia.Model.ReplyKeyboardHide` or `Alexia.Model.ForceReply`
+  `Alexia.Model.ReplyKeyboardRemove` or `Alexia.Model.ForceReply`
   """
   @spec send_audio(binary,integer, binary, [{atom, any}]) :: {:ok, Message.t()} | {:error, Error.t()}
   def send_audio(token,chat_id, audio, options \\ []) do
@@ -152,7 +152,7 @@ defmodule Alexia do
   * `:reply_to_message_id` - If the message is a reply, ID of the original message
   * `:reply_markup` - Additional interface options. Instructions to hide keyboard or to
   force a reply from the user - `Alexia.Model.ReplyKeyboardMarkup` or
-  `Alexia.Model.ReplyKeyboardHide` or `Alexia.Model.ForceReply`
+  `Alexia.Model.ReplyKeyboardRemove` or `Alexia.Model.ForceReply`
   """
   @spec send_document(binary,integer, binary, [{atom, any}]) :: {:ok, Message.t()} | {:error, Error.t()}
   def send_document(token,chat_id, document, options \\ []) do
@@ -176,7 +176,7 @@ defmodule Alexia do
   * `:reply_to_message_id` - If the message is a reply, ID of the original message
   * `:reply_markup` - Additional interface options. Instructions to hide keyboard or to
   force a reply from the user - `Alexia.Model.ReplyKeyboardMarkup` or
-  `Alexia.Model.ReplyKeyboardHide` or `Alexia.Model.ForceReply`
+  `Alexia.Model.ReplyKeyboardRemove` or `Alexia.Model.ForceReply`
   """
   @spec send_sticker(binary,integer, binary, [{atom, any}]) :: {:ok, Message.t()} | {:error, Error.t()}
   def send_sticker(token,chat_id, sticker, options \\ []) do
@@ -205,7 +205,7 @@ defmodule Alexia do
   * `:reply_to_message_id` - If the message is a reply, ID of the original message
   * `:reply_markup` - Additional interface options. Instructions to hide keyboard or to
   force a reply from the user - `Alexia.Model.ReplyKeyboardMarkup` or
-  `Alexia.Model.ReplyKeyboardHide` or `Alexia.Model.ForceReply`
+  `Alexia.Model.ReplyKeyboardRemove` or `Alexia.Model.ForceReply`
   """
   @spec send_video(binary,integer, binary, [{atom, any}]) :: {:ok, Message.t()} | {:error, Error.t()}
   def send_video(token,chat_id, video, options \\ []) do
@@ -234,7 +234,7 @@ defmodule Alexia do
   * `:reply_to_message_id` - If the message is a reply, ID of the original message
   * `:reply_markup` - Additional interface options. Instructions to hide keyboard or to
   force a reply from the user - `Alexia.Model.ReplyKeyboardMarkup` or
-  `Alexia.Model.ReplyKeyboardHide` or `Alexia.Model.ForceReply`
+  `Alexia.Model.ReplyKeyboardRemove` or `Alexia.Model.ForceReply`
   """
   @spec send_voice(binary, integer, binary, [{atom, any}]) :: {:ok, Message.t()} | {:error, Error.t()}
   def send_voice(token,chat_id, voice, options \\ []) do
@@ -258,7 +258,7 @@ defmodule Alexia do
   * `:reply_to_message_id` - If the message is a reply, ID of the original message
   * `:reply_markup` - Additional interface options. Instructions to hide keyboard or to
   force a reply from the user - `Alexia.Model.ReplyKeyboardMarkup` or
-  `Alexia.Model.ReplyKeyboardHide` or `Alexia.Model.ForceReply`
+  `Alexia.Model.ReplyKeyboardRemove` or `Alexia.Model.ForceReply`
   """
   @spec send_location(binary,integer, float, float, [{atom, any}]) ::
           {:ok, Message.t()} | {:error, Error.t()}
@@ -291,7 +291,7 @@ defmodule Alexia do
   * `:reply_markup` - Additional interface options. A JSON-serialized object for
   an inline keyboard, custom reply keyboard, instructions to hide reply keyboard
   or to force a reply from the user. - `Alexia.Model.InlineKeyboardMarkup` or
-  `Alexia.Model.ReplyKeyboardMarkup` or `Alexia.Model.ReplyKeyboardHide` or
+  `Alexia.Model.ReplyKeyboardMarkup` or `Alexia.Model.ReplyKeyboardRemove` or
   `Alexia.Model.ForceReply`
   """
   @spec send_venue(binary,integer, float, float, binary, binary, [{atom, any}]) ::
@@ -324,7 +324,7 @@ defmodule Alexia do
   * `:reply_markup` - Additional interface options. A JSON-serialized object for
   an inline keyboard, custom reply keyboard, instructions to hide reply keyboard
   or to force a reply from the user. - `Alexia.Model.InlineKeyboardMarkup` or
-  `Alexia.Model.ReplyKeyboardMarkup` or `Alexia.Model.ReplyKeyboardHide` or
+  `Alexia.Model.ReplyKeyboardMarkup` or `Alexia.Model.ReplyKeyboardRemove` or
   `Alexia.Model.ForceReply`
   """
   @spec send_contact(binary,integer, binary, binary, [{atom, any}]) ::
@@ -335,6 +335,35 @@ defmodule Alexia do
       token,
       [chat_id: chat_id, phone_number: phone_number, first_name: first_name] ++ options
     )
+  end
+
+   @doc """
+    Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without sound).
+    On success, the sent Message is returned. Bots can currently send animation files of up
+    to 50 MB in size, this limit may be changed in the future.
+    Args:
+    * `chat_id` - Unique identifier for the target chat or username of the target channel
+    (in the format @channelusername)
+    * `animation` - Animation to send. Pass a file_id as String to send an animation that
+    exists on the Telegram servers (recommended), pass an HTTP URL as a String for
+    Telegram to get an animation from the Internet, or upload a new animation using multipart/form-data.
+    Options:
+    * `:duration` - Duration of sent animation in seconds
+    * `:width` - Animation width
+    * `:height` - Animation height
+    * `:thumb` - Thumbnail of the file sent; can be ignored if thumbnail generation for the file
+    is supported server-side. thumbnail should be in JPEG format and less than 200 kB in size.
+    * `:caption` - Animation caption (may also be used when resending animation by file_id), 0-1024 characters
+    * `:parse_mode` - Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width
+    text or inline URLs in the media caption.
+    * `:disable_notification` - Sends the message silently. Users will receive a notification with no sound.
+    * `:reply_to_message_id` - If the message is a reply, ID of the original message
+    * `:reply_markup` - Additional interface options. A JSON-serialized object for an inline keyboard,
+    custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user.
+  """
+  @spec send_animation(integer, binary, [{atom, any}]) :: {:ok, Message.t()} | {:error, Error.t()}
+  def send_animation(chat_id, animation, options \\ []) do
+    request("sendAnimation", [chat_id: chat_id, animation: animation] ++ options)
   end
 
   @doc """
@@ -606,6 +635,28 @@ defmodule Alexia do
   end
 
   @doc """
+    Use this method to delete message from a chat.
+    Bot should have admin permission to do that, and remember you can't delete messages that are more than
+    48 hours old.
+    Args:
+    * `chat_id` - Unique identifier for the target chat or username of the target channel
+    (in the format @channelusername)
+    * `message_id` - Required if inline_message_id is not specified. Unique identifier of
+    the sent message
+  """
+  @spec delete_message(integer | binary, integer) :: :ok | {:error, Error.t()}
+  def delete_message(chat_id, message_id) do
+    request(
+      "deleteMessage",
+      chat_id: chat_id,
+      message_id: message_id
+    )
+  end
+
+
+
+
+  @doc """
   Use this method to edit text messages sent by the bot or via the bot (for inline bots).
   On success, the edited Message is returned
 
@@ -725,12 +776,13 @@ defmodule Alexia do
       |> Enum.map(fn result ->
         for {k, v} <- Map.from_struct(result), v != nil, into: %{}, do: {k, v}
       end)
-      |> Poison.encode!()
+      |> Jason.encode!()
 
     args = [inline_query_id: inline_query_id, results: encoded_results]
 
     request("answerInlineQuery",token, args ++ options)
   end
+
 
 
   @doc """
@@ -751,5 +803,143 @@ defmodule Alexia do
   @spec send_media_group(binary, integer, [Alexia.Model.InputMediaPhoto.t()], [{atom, any}]) :: {:ok, Message.t()} | {:error, Error.t()}
   def send_media_group(token,chat_id, media, options \\ []) do
     request("sendMediaGroup", token, [chat_id: chat_id, media: media] ++ options, :media)
+  end
+
+
+    @doc """
+  Use this method to get a sticker set. On success, a StickerSet object is returned.
+  Args:
+  * `name` - Name of the sticker set
+  """
+  @spec get_sticker_set(binary) :: {:ok, Nadia.Model.StickerSet.t()} | {:error, Error.t()}
+  def get_sticker_set(name) do
+    request("getStickerSet", name: name)
+  end
+
+  @doc """
+  Use this method to upload a .png file with a sticker for later use in
+  createNewStickerSet and addStickerToSet methods (can be used multiple times).
+  Returns the uploaded File on success.
+  Args:
+  * `user_id` - User identifier of sticker file owner
+  * `png_sticker` - Png image with the sticker, must be up to 512 kilobytes in size,
+  dimensions must not exceed 512px, and either width or height must be exactly 512px.
+  Either a `file_id` to resend a file that is already on the Telegram servers,
+  or a `file_path` to upload a new file from local, or a `HTTP URL` to get a file
+  from the internet.
+  """
+  @spec upload_sticker_file(integer, binary) :: {:ok, File.t()} | {:error, Error.t()}
+  def upload_sticker_file(user_id, png_sticker) do
+    request("uploadStickerFile", [user_id: user_id, png_sticker: png_sticker], :png_sticker)
+  end
+
+  @doc """
+  Use this method to create new sticker set owned by a user. The bot will be able to
+  edit the created sticker set. Returns True on success.
+  Args:
+  * `user_id` - User identifier of created sticker set owner
+  * `name` - Short name of sticker set, to be used in t.me/addstickers/ URLs (e.g., animals).
+  Can contain only english letters, digits and underscores. Must begin with a letter,
+  can't contain consecutive underscores and must end in “_by_<bot username>”. <bot_username>
+  is case insensitive. 1-64 characters.
+  * `title` - Sticker set title, 1-64 characters
+  * `png_sticker` - Png image with the sticker, must be up to 512 kilobytes in size,
+  dimensions must not exceed 512px, and either width or height must be exactly 512px.
+  Either a `file_id` to resend a file that is already on the Telegram servers,
+  or a `file_path` to upload a new file from local, or a `HTTP URL` to get a file
+  from the internet.
+  * `emojis` - One or more emoji corresponding to the sticker
+  Options:
+  * `contains_masks` - Pass True, if a set of mask stickers should be created
+  * `mask_position` - A `Nadia.Model.MaskPosition` object for position where the mask
+  should be placed on faces
+  """
+  @spec create_new_sticker_set(integer, binary, binary, binary, binary, [{atom, any}]) ::
+          :ok | {:error, Error.t()}
+  def create_new_sticker_set(user_id, name, title, png_sticker, emojis, options \\ []) do
+    request(
+      "createNewStickerSet",
+      [user_id: user_id, name: name, title: title, png_sticker: png_sticker, emojis: emojis] ++
+        options,
+      :png_sticker
+    )
+  end
+
+  @doc """
+  Use this method to add a new sticker to a set created by the bot. Returns True on success.
+  Args:
+  * `user_id` - User identifier of created sticker set owner
+  * `name` - Sticker set name
+  * `png_sticker` - Png image with the sticker, must be up to 512 kilobytes in size,
+  dimensions must not exceed 512px, and either width or height must be exactly 512px.
+  Either a `file_id` to resend a file that is already on the Telegram servers,
+  or a `file_path` to upload a new file from local, or a `HTTP URL` to get a file
+  from the internet.
+  * `emojis` - One or more emoji corresponding to the sticker
+  Options:
+  * `mask_position` - A `Nadia.Model.MaskPosition` object for position where the mask
+  should be placed on faces
+  """
+  @spec add_sticker_to_set(integer, binary, binary, binary, [{atom, any}]) ::
+          :ok | {:error, Error.t()}
+  def add_sticker_to_set(user_id, name, png_sticker, emojis, options \\ []) do
+    request(
+      "addStickerToSet",
+      [user_id: user_id, name: name, png_sticker: png_sticker, emojis: emojis] ++ options,
+      :png_sticker
+    )
+  end
+
+  @doc """
+  Use this method to move a sticker in a set created by the bot to a specific position.
+  Returns True on success.
+  Args:
+  * `sticker` - File identifier of the sticker
+  * `position` - New sticker position in the set, zero-based
+  """
+  @spec set_sticker_position_in_set(binary, integer) :: :ok | {:error, Error.t()}
+  def set_sticker_position_in_set(sticker, position) do
+    request("setStickerPositionInSet", sticker: sticker, position: position)
+  end
+
+  @doc """
+  Use this method to delete a sticker from a set created by the bot. Returns True on success.
+  Args:
+  * `sticker` - File identifier of the sticker
+  """
+  @spec delete_sticker_from_set(binary) :: :ok | {:error, Error.t()}
+  def delete_sticker_from_set(sticker) do
+    request("deleteStickerFromSet", sticker: sticker)
+  end
+
+  @doc """
+  Use this method to pin a message in a group, a supergroup, or a channel. The bot must be an
+  administrator in the chat for this to work and must have the ‘can_pin_messages’ admin right
+  in the supergroup or ‘can_edit_messages’ admin right in the channel. Returns True on success.
+  Args:
+  * `chat_id` - Unique identifier for the target chat or username of the target channel
+  (in the format @channelusername)
+  * `message_id` - Identifier of a message to pin
+  Options:
+  * `disable_notification` - Pass True, if it is not necessary to send a notification to all
+  chat members about the new pinned message. Notifications are always disabled in channels.
+  """
+  @spec pin_chat_message(integer | binary, integer | binary, [{atom, any}]) ::
+          :ok | {:error, Error.t()}
+  def pin_chat_message(chat_id, message_id, options \\ []) do
+    request("pinChatMessage", [chat_id: chat_id, message_id: message_id] ++ options)
+  end
+
+  @doc """
+  Use this method to unpin a message in a group, a supergroup, or a channel. The bot must be an
+  administrator in the chat for this to work and must have the ‘can_pin_messages’ admin right in
+  the supergroup or ‘can_edit_messages’ admin right in the channel. Returns True on success.
+  Args:
+  * `chat_id` - Unique identifier for the target chat or username of the target channel
+  (in the format @channelusername)
+  """
+  @spec unpin_chat_message(integer | binary) :: :ok | {:error, Error.t()}
+  def unpin_chat_message(chat_id) do
+    request("unpinChatMessage", chat_id: chat_id)
   end
 end

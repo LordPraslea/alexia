@@ -20,7 +20,7 @@ defmodule Alexia.API do
 
   defp decode_response(response) do
     with {:ok, %HTTPoison.Response{body: body}} <- response,
-         {:ok, %{result: result}} <- Poison.decode(body, keys: :atoms),
+         {:ok, %{result: result}} <- Jason.decode(body, keys: :atoms),
          do: {:ok, result}
   end
 
@@ -46,22 +46,22 @@ defmodule Alexia.API do
   #Usage for media
   defp build_request(params, file_field) when is_list(params) and file_field == :media do
     params
-    |> Keyword.update(:media, nil, &Poison.encode!(&1))
+    |> Keyword.update(:media, nil, &Jason.encode!(&1))
     |> map_params(file_field)
   end
 
   defp build_request(params, file_field) when is_list(params) do
     params
-    |> Keyword.update(:reply_markup, nil, &Poison.encode!(&1))
+    |> Keyword.update(:reply_markup, nil, &Jason.encode!(&1))
     |> map_params(file_field)
   end
 
   defp build_request(params, file_field) when is_map(params) do
     params
-    |> Map.update(:reply_markup, nil, &Poison.encode!(&1))
+    |> Map.update(:reply_markup, nil, &Jason.encode!(&1))
     |> map_params(file_field)
   end
-      #  if(!is_list(v), do:  {k, to_string(v)},  else:  Poison.encode!(v))
+      #  if(!is_list(v), do:  {k, to_string(v)},  else:  Jason.encode!(v))
   defp map_params(params, file_field) do
     params =
       params

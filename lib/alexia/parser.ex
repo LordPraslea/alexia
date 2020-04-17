@@ -12,7 +12,7 @@ defmodule Alexia.Parser do
     PhotoSize,
     Audio,
     Document,
-    Sticker,
+    # Sticker,
     InlineQuery,
     ChosenInlineResult,
     WebhookInfo
@@ -20,6 +20,7 @@ defmodule Alexia.Parser do
 
   alias Alexia.Model.{Video, Voice, Contact, Location, Venue, Update, File, CallbackQuery}
   alias Alexia.Model.UserProfilePhotos
+  alias Alexia.Model.{Sticker, StickerSet}
 
   @doc """
   parse `result` field of decoded API response json.
@@ -43,6 +44,8 @@ defmodule Alexia.Parser do
       "getChatAdministrators" -> parse(:chat_members, result)
       "getChatMembersCount" -> result
       "sendMediaGroup" -> parse(:messages,result)
+      "getStickerSet" -> parse(StickerSet, result)
+      "uploadStickerFile" -> parse(File, result)
       _ -> parse(Message, result)
     end
   end

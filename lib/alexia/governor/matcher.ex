@@ -21,6 +21,7 @@ defmodule Alexia.Governor.Matcher do
     GenServer.start_link __MODULE__, bot, name: name
   end
 
+  @spec init(atom | %{current_bot_hash: any}) :: {:ok, atom | %{current_bot_hash: any}}
   def init(bot) do
     :ets.insert(:alexia_bot_info,{{bot.current_bot_hash, :matcher},self()})
     {:ok, bot}

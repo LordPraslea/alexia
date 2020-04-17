@@ -4,7 +4,7 @@ defmodule Alexia.Mixfile do
   def project do
     [
       app: :alexia,
-      version: "0.5.4",
+      version: "0.7.0",
       elixir: "~> 1.6",
       description: description(),
       package: package(),
@@ -18,7 +18,7 @@ defmodule Alexia.Mixfile do
   #
   # Type `mix help compile.app` for more information
   def application do
-    [applications: [:httpoison, :poison]]
+    [applications: [:httpoison]]
   end
 
   # Dependencies can be Hex packages:
@@ -32,12 +32,12 @@ defmodule Alexia.Mixfile do
   # Type `mix help deps` for more examples and options
   defp deps do
     [
-      {:httpoison, "~> 1.5.0"},
-      {:poison, "~> 3.0"}, #4.0.1 Breaks dependency with sqlite in ecto 2
+      {:httpoison, "~> 1.6"},
+      {:jason, "~> 1.1"},
       {:exvcr, "~> 0.10.1", only: [:dev, :test]},
       {:bypass, "~> 1.0", only: [:test, :dev]},
       {:earmark, "~> 1.3.2", only: :docs},
-      {:ex_doc, "~> 0.20.1", only: :docs},
+      {:ex_doc, "~> 0.20.2", only: :docs},
       {:inch_ex, "~> 2.0.0", only: :docs}
     ]
   end

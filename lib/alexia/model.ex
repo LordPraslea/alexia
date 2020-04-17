@@ -74,7 +74,14 @@ defmodule Alexia.Model do
   end
 
   defmodule Sticker do
-    defstruct file_id: nil, width: nil, height: nil, thumb: nil, emoji: nil, file_size: nil
+    defstruct file_id: nil,
+          width: nil,
+          height: nil,
+          thumb: nil,
+          emoji: nil,
+          set_name: nil,
+          mask_position: nil,
+          file_size: nil
 
     @type t :: %Sticker{
             file_id: binary,
@@ -82,7 +89,31 @@ defmodule Alexia.Model do
             height: integer,
             thumb: PhotoSize.t(),
             emoji: binary,
+            set_name: binary,
+            mask_position: MaskPosition.t(),
             file_size: integer
+          }
+  end
+
+  defmodule StickerSet do
+    defstruct name: nil, title: nil, contains_masks: false, stickers: []
+
+    @type t :: %StickerSet{
+            name: binary,
+            title: binary,
+            contains_masks: boolean,
+            stickers: [Sticker.t()]
+          }
+  end
+
+  defmodule MaskPosition do
+    defstruct point: nil, x_shift: nil, y_shift: nil, scale: nil
+
+    @type t :: %MaskPosition{
+            point: binary,
+            x_shift: float,
+            y_shift: float,
+            scale: float
           }
   end
 
@@ -275,6 +306,7 @@ defmodule Alexia.Model do
   end
 
   defmodule ReplyKeyboardMarkup do
+    @derive Jason.Encoder
     defstruct keyboard: [], resize_keyboard: false, one_time_keyboard: false, selective: false
 
     @type t :: %ReplyKeyboardMarkup{
@@ -286,13 +318,15 @@ defmodule Alexia.Model do
   end
 
   defmodule KeyboardButton do
+    @derive Jason.Encoder
     defstruct text: nil, request_contact: false, request_location: false
     @type t :: %KeyboardButton{text: binary, request_contact: atom, request_location: atom}
   end
 
-  defmodule ReplyKeyboardHide do
-    defstruct hide_keyboard: true, selective: false
-    @type t :: %ReplyKeyboardHide{hide_keyboard: true, selective: atom}
+   defmodule ReplyKeyboardRemove do
+    @derive Jason.Encoder
+    defstruct remove_keyboard: true, selective: false
+    @type t :: %ReplyKeyboardRemove{remove_keyboard: true, selective: atom}
   end
 
   defmodule InlineKeyboardMarkup do
@@ -325,6 +359,7 @@ defmodule Alexia.Model do
   end
 
   defmodule ForceReply do
+    @derive Jason.Encoder
     defstruct force_reply: true, selective: false
     @type t :: %ForceReply{force_reply: true, selective: atom}
   end

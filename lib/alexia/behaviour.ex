@@ -13,6 +13,8 @@ defmodule Alexia.Behaviour do
               {:ok, Message.t()} | {:error, Error.t()}
   @callback send_video(binary, integer, binary, [{atom, any}]) :: {:ok, Message.t()} | {:error, Error.t()}
   @callback send_voice(binary, integer, binary, [{atom, any}]) :: {:ok, Message.t()} | {:error, Error.t()}
+  @callback send_animation(integer, binary, [{atom, any}]) ::
+              {:ok, Message.t()} | {:error, Error.t()}
   @callback send_location(binary, integer, float, float, [{atom, any}]) ::
               {:ok, Message.t()} | {:error, Error.t()}
   @callback send_venue(binary, integer, float, float, binary, binary, [{atom, any}]) ::
@@ -36,7 +38,7 @@ defmodule Alexia.Behaviour do
   @callback get_chat_member(binary,integer | binary, integer) ::
               {:ok, ChatMember.t()} | {:error, Error.t()}
   @callback answer_callback_query(binary,binary, [{atom, any}]) :: :ok | {:error, Error.t()}
-  @callback edit_message_text(binary,integer | binary, integer, binary, [{atom, any}]) ::
+  @callback edit_message_text(binary,integer | binary, integer, binary, binary, [{atom, any}]) ::
               {:ok, Message.t()} | {:error, Error.t()}
   @callback edit_message_caption(binary,integer | binary, integer, binary, [{atom, any}]) ::
               {:ok, Message.t()} | {:error, Error.t()}
